@@ -6,7 +6,6 @@ class player:
         self.hand.append(card)
     
     def get_size_hand(self):
-        print(len(self.hand))
         return len(self.hand)
     
     def get_hand(self):
