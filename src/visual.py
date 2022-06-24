@@ -7,10 +7,10 @@ from PIL import Image, ImageTk
 
 
 class Visual:
-    def __init__(self, reglas):
+    def __init__(self, reglas, deck):
         global root
         root = Tk()
-        root.title('Durak game')
+        root.title(f'Durak game - {len(deck)} Cartas faltantes')
         root.geometry("1200x800")
         root.configure(background="green")
 
