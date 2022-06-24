@@ -13,21 +13,26 @@ class durak(Game):
       cards = Cards()
       player_one = player()
       player_two = player()
-      
+
       visual.set_reglas(self.reglas)
 
       # Crea el mazo para el juego
       cards.createDeck()
 
+      card = self.select_especial_card(cards)
+
       self.draw(self, cards, visual, player_one, player_two)
 
       if (player_one.get_size_hand() == 6):
-         visual.config_image(player_one.get_hand(), player_two.get_hand())
+         visual.config_image(player_one.get_hand(), player_two.get_hand(), card)
 
       visual.show_game()
 
+   def select_especial_card(cards):
+      return cards.deal_cards()
+
    def draw(self, cards, visual,  player_one, player_two):
-        if (len(cards.deck_player_one) == 0) or (len(cards.deck_player_two) == 0) and len(cards.deck) > 12:
+        if (player_one.get_size_hand() == 0) or (player_two.get_size_hand() == 0) and len(cards.deck) > 12:
             for index in range(6*2):
                 if (index <= 5):
                     card = cards.deal_cards()
@@ -35,7 +40,7 @@ class durak(Game):
                 else:
                     card = cards.deal_cards()
                     player_two.append_card(card)
-        elif (len(cards.deck_player_one) == 0) or (len(cards.deck_player_two) == 0) and len(cards.deck) < 12:
+        elif (player_one.get_size_hand() == 0) or (player_two.get_size_hand() == 0) and len(cards.deck) < 12:
              for index in range(2*2):
                 if (index <= 2):
                     card = cards.deal_cards()

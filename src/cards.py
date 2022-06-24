@@ -8,12 +8,6 @@ class Cards:
 
         self.deck = []
 
-        self.deck_player_one = []
-        self.score_player_one = 0
-
-        self.deck_player_two = []
-        self.score_player_two = 0
-
     def createDeck(self):
         for suit in self.suits:
             for value in self.values:
@@ -21,16 +15,6 @@ class Cards:
         #print(self.deck)
         #print(len(self.deck))
 
-    """def deal_cards(self, amount_cards):
-        for index in range(amount_cards*2):
-            if (index <= 5):
-                card = random.choice(self.deck)
-                self.deck.remove(card)
-                self.deck_player_one.append(card)
-            else:
-                card = random.choice(self.deck)
-                self.deck.remove(card)
-                self.deck_player_two.append(card)"""
     def deal_cards(self):
         card = random.choice(self.deck)
         self.deck.remove(card)

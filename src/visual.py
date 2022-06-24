@@ -18,16 +18,21 @@ class Visual:
         frame.pack(pady=20)
 
         self.reglas = reglas
-       
-
-        
+              
         # Crea imagen para las cartas de los jugadores
         player_one_frame = LabelFrame(frame, text="Jugador 1", bd=0)
-        player_one_frame.pack(padx=20, ipadx=20)
+        player_one_frame.pack(padx=10, ipadx=10)
 
         player_two_frame = LabelFrame(frame, text="Jugador 2", bd=0)
         player_two_frame.pack(ipadx=10, pady=10)
 
+        # Crea imagen para la carta especial y coloca cartas en la imagen
+        especial_card_frame = LabelFrame(frame, text = "Carta especial", bd=0)  
+        especial_card_frame.pack(padx=10, ipadx=10)
+
+        self.especial_card_label = Label(especial_card_frame, text='')
+        self.especial_card_label.grid(row=2, column=5, pady=20, padx = 20) 
+        
         # Coloca las cartas en la imagen
 
         # Para el jugador 1
@@ -121,20 +126,23 @@ class Visual:
 
          return card_image_final_player
 
-    def config_image(self, deck_player_one, deck_player_two):
+    def config_image(self, deck_player_one, deck_player_two, card):
         global card_image_final_player_one, card_image_final_player_two, card_image_final_player_three, card_image_final_player_four
         global card_image_final_player_five, card_image_final_player_six, card_image_final_player_seven, card_image_final_player_eight
         global card_image_final_player_nine, card_image_final_player_ten, card_image_final_player_eleven, card_image_final_player_twelve
+        global card_image_final_especial_card
+
+        card_image_player = Image.open(f'../cards/{card}.png')
+        card_resize_image_player = card_image_player.resize((150, 218))
+        card_image_final_especial_card = ImageTk.PhotoImage(card_resize_image_player)
+        self.especial_card_label.config(image=card_image_final_especial_card)
 
         for index in range(len(deck_player_one)):
             # Jugador 1
-            print("1", deck_player_one[index])
+            #print("1", deck_player_one[index])
 
             # Jugador 2
-            """card_image_player_two = Image.open(f'../cards/{deck_player_two[index]}.png')
-            card_resize_image_player_two = card_image_player_two.resize((150, 218))
-            card_image_final_player_two = ImageTk.PhotoImage(card_resize_image_player_two)"""
-            print("2", deck_player_two[index])
+            #print("2", deck_player_two[index])
 
             # Salida de la carta a la pantalla en forma de imagen
             if (index == 0):
