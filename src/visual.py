@@ -1,13 +1,11 @@
 from tkinter import *
+import tkinter.font as font
 from tkinter import messagebox
 from PIL import Image, ImageTk
 
-
-
-
-
 class Visual:
     def __init__(self, reglas):
+        # Juego Principal
         global root
         root = Tk()
         root.title('Durak game')
@@ -18,54 +16,61 @@ class Visual:
         frame.pack(pady=20)
 
         self.reglas = reglas
-       
+
+        # Seleccion
+
+        self.seleccion_frame = LabelFrame(frame, text="", bd=0, bg='green')
+        self.seleccion_frame.pack(padx=10, ipadx=20)
+
+        self.seleccion_label = Label(self.seleccion_frame, text='Seleccione su turno', font=("Arial", 20), bg='green')
+        self.seleccion_label.grid(row=0, column=0, pady=20, padx = 20)
 
         
         # Crea imagen para las cartas de los jugadores
-        player_one_frame = LabelFrame(frame, text="Jugador 1", bd=0)
-        player_one_frame.pack(padx=20, ipadx=20)
+        self.player_one_frame = LabelFrame(frame, text="Jugador 1", bd=0)
+        self.player_one_frame.pack(padx=20, ipadx=20)
 
-        player_two_frame = LabelFrame(frame, text="Jugador 2", bd=0)
-        player_two_frame.pack(ipadx=10, pady=10)
+        self.player_two_frame = LabelFrame(frame, text="Jugador 2", bd=0)
+        self.player_two_frame.pack(ipadx=10, pady=10)
 
         # Coloca las cartas en la imagen
 
         # Para el jugador 1
-        self.player_one_label_1 = Label(player_one_frame, text='')
+        self.player_one_label_1 = Label(self.player_one_frame, text='')
         self.player_one_label_1.grid(row=0, column=0, pady=20, padx = 20)
 
-        self.player_one_label_2 = Label(player_one_frame, text='')
+        self.player_one_label_2 = Label(self.player_one_frame, text='')
         self.player_one_label_2.grid(row=0, column=1, pady=20, padx = 20)
 
-        self.player_one_label_3 = Label(player_one_frame, text='')
+        self.player_one_label_3 = Label(self.player_one_frame, text='')
         self.player_one_label_3.grid(row=0, column=2, pady=20, padx = 20)
 
-        self.player_one_label_4 = Label(player_one_frame, text='')
+        self.player_one_label_4 = Label(self.player_one_frame, text='')
         self.player_one_label_4.grid(row=0, column=3, pady=20, padx = 20)
 
-        self.player_one_label_5 = Label(player_one_frame, text='')
+        self.player_one_label_5 = Label(self.player_one_frame, text='')
         self.player_one_label_5.grid(row=0, column=4, pady=20, padx = 20)
 
-        self.player_one_label_6 = Label(player_one_frame, text='')
+        self.player_one_label_6 = Label(self.player_one_frame, text='')
         self.player_one_label_6.grid(row=0, column=5, pady=20, padx = 20)
 
         # Para el jugador 2 
-        self.player_two_label_1 = Label(player_two_frame, text='')
+        self.player_two_label_1 = Label(self.player_two_frame, text='')
         self.player_two_label_1.grid(row=1, column=0, pady=20, padx=20)
 
-        self.player_two_label_2 = Label(player_two_frame, text='')
+        self.player_two_label_2 = Label(self.player_two_frame, text='')
         self.player_two_label_2.grid(row=1, column=1, pady=20, padx=20)
 
-        self.player_two_label_3 = Label(player_two_frame, text='')
+        self.player_two_label_3 = Label(self.player_two_frame, text='')
         self.player_two_label_3.grid(row=1, column=2, pady=20, padx=20)
 
-        self.player_two_label_4 = Label(player_two_frame, text='')
+        self.player_two_label_4 = Label(self.player_two_frame, text='')
         self.player_two_label_4.grid(row=1, column=3, pady=20, padx=20)
 
-        self.player_two_label_5 = Label(player_two_frame, text='')
+        self.player_two_label_5 = Label(self.player_two_frame, text='')
         self.player_two_label_5.grid(row=1, column=4, pady=20, padx=20)
 
-        self.player_two_label_6 = Label(player_two_frame, text='')
+        self.player_two_label_6 = Label(self.player_two_frame, text='')
         self.player_two_label_6.grid(row=1, column=5, pady=20, padx=20)
 
 
@@ -80,12 +85,42 @@ class Visual:
     
  
     def show_game(self):
-        myButton = Button(root, text="Mostrar Reglas", command=self.click)
-        myButton.pack()
-        root.mainloop()
+        while (self.flag) :
+            myButton = Button(root, text="Mostrar Reglas", command=self.click)
+            myButton.pack()
+            root.mainloop()
+
+    def pick_turn(self):
+        f = font.Font(size=15)
+        self.player_one_frame.pack_forget()
+        self.player_two_frame.pack_forget()
+        self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
+        self.myButtonFirst['font'] = f
+        self.myButtonSecond = Button(root, text="Segundo", command=self.second_turn, width=25)
+        self.myButtonSecond['font'] = f
+        self.myButtonFirst.pack(pady = 5)
+        self.myButtonSecond.pack(pady = 5)
+        self.flag = True
 
     def click(self):
         messagebox.showinfo("Reglas", self.reglas)
+
+    def first_turn(self):
+        messagebox.showinfo("Turno", "Tu turno es de Primero!")
+        self.player_one_frame.pack(padx=20, ipadx=20)
+        self.player_two_frame.pack(ipadx=10, pady=10) 
+        self.myButtonFirst.pack_forget()
+        self.myButtonSecond.pack_forget()
+        self.seleccion_frame.pack_forget()
+         
+
+    def second_turn(self):
+        messagebox.showinfo("Turno", "Tu turno es de Segundo!")
+        self.player_one_frame.pack(padx=20, ipadx=20)
+        self.player_two_frame.pack(ipadx=10, pady=10)  
+        self.myButtonFirst.pack_forget()
+        self.myButtonSecond.pack_forget()
+        self.seleccion_frame.pack_forget()
 
     def clean_old_cards(self):
          # Para el jugador 1

@@ -16,6 +16,8 @@ class durak(Game):
       # Crea el mazo para el juego
       cards.createDeck()
 
+      visual.pick_turn()
+
       self.draw(self, cards, visual, player_one, player_two)
 
       if (player_one.get_size_hand() == 6):
