@@ -113,7 +113,6 @@ class Visual:
     def first_turn(self):
         messagebox.showinfo("Turno", "Tu turno es de Primero!")
         self.player_one_frame.pack(padx=10, ipadx=10)
-        self.player_two_frame.pack(ipadx=10, pady=10) 
         self.especial_card_frame.pack(padx=10, ipadx=10)
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
@@ -122,7 +121,6 @@ class Visual:
 
     def second_turn(self):
         messagebox.showinfo("Turno", "Tu turno es de Segundo!")
-        self.player_one_frame.pack(padx=10, ipadx=10)
         self.player_two_frame.pack(ipadx=10, pady=10)  
         self.especial_card_frame.pack(padx=10, ipadx=10)
         self.myButtonFirst.pack_forget()
