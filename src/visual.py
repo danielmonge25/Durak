@@ -2,8 +2,12 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import Image, ImageTk
 
+
+
+
+
 class Visual:
-    def __init__(self):
+    def __init__(self, reglas):
         global root
         root = Tk()
         root.title('Durak game')
@@ -13,6 +17,10 @@ class Visual:
         frame = Frame(root, bg="green")
         frame.pack(pady=20)
 
+        self.reglas = reglas
+       
+
+        
         # Crea imagen para las cartas de los jugadores
         player_one_frame = LabelFrame(frame, text="Jugador 1", bd=0)
         player_one_frame.pack(padx=20, ipadx=20)
@@ -69,8 +77,15 @@ class Visual:
         #messagebox.showinfo("Inicia el jugador 2")
         print("A")
 
+    
+ 
     def show_game(self):
+        myButton = Button(root, text="Mostrar Reglas", command=self.click)
+        myButton.pack()
         root.mainloop()
+
+    def click(self):
+        messagebox.showinfo("Reglas", self.reglas)
 
     def clean_old_cards(self):
          # Para el jugador 1
@@ -162,3 +177,9 @@ class Visual:
     def player_defend():
         messagebox.showinfo("El jugador se defendio")
         #cad_button.config(state="disabled")
+
+    def set_reglas(self,reglas):
+        self.reglas = reglas
+        
+    
+ 
