@@ -34,7 +34,7 @@ class Visual:
 
         # Crea imagen para la carta especial y coloca cartas en la imagen
         self.especial_card_frame = LabelFrame(frame, text = "Carta especial", bd=0)  
-        self.especial_card_frame.pack(padx=10, ipadx=10)
+        self.especial_card_frame.pack(ipadx=10, pady=10)
 
         self.especial_card_label = Label(self.especial_card_frame, text='')
         self.especial_card_label.grid(row=2, column=5, pady=20, padx = 20) 
@@ -113,7 +113,7 @@ class Visual:
     def first_turn(self):
         messagebox.showinfo("Turno", "Tu turno es de Primero!")
         self.player_one_frame.pack(padx=10, ipadx=10)
-        self.especial_card_frame.pack(padx=10, ipadx=10)
+        self.especial_card_frame.pack(ipadx=10, pady=10)
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
@@ -122,7 +122,7 @@ class Visual:
     def second_turn(self):
         messagebox.showinfo("Turno", "Tu turno es de Segundo!")
         self.player_two_frame.pack(ipadx=10, pady=10)  
-        self.especial_card_frame.pack(padx=10, ipadx=10)
+        self.especial_card_frame.pack(ipadx=10, pady=10)
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
