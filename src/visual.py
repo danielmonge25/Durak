@@ -4,11 +4,10 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 
 class Visual:
-    def __init__(self, reglas):
-        # Juego Principal
+    def __init__(self, reglas, deck):
         global root
         root = Tk()
-        root.title('Durak game')
+        root.title(f'Durak game - {len(deck)} Cartas faltantes')
         root.geometry("1200x800")
         root.configure(background="green")
 
@@ -28,11 +27,18 @@ class Visual:
         
         # Crea imagen para las cartas de los jugadores
         self.player_one_frame = LabelFrame(frame, text="Jugador 1", bd=0)
-        self.player_one_frame.pack(padx=20, ipadx=20)
+        self.player_one_frame.pack(padx=10, ipadx=10)
 
         self.player_two_frame = LabelFrame(frame, text="Jugador 2", bd=0)
         self.player_two_frame.pack(ipadx=10, pady=10)
 
+        # Crea imagen para la carta especial y coloca cartas en la imagen
+        self.especial_card_frame = LabelFrame(frame, text = "Carta especial", bd=0)  
+        self.especial_card_frame.pack(padx=10, ipadx=10)
+
+        self.especial_card_label = Label(self.especial_card_frame, text='')
+        self.especial_card_label.grid(row=2, column=5, pady=20, padx = 20) 
+        
         # Coloca las cartas en la imagen
 
         # Para el jugador 1
@@ -85,30 +91,30 @@ class Visual:
     
  
     def show_game(self):
-        while (self.flag) :
-            myButton = Button(root, text="Mostrar Reglas", command=self.click)
-            myButton.pack()
-            root.mainloop()
+        myButton = Button(root, text="Mostrar Reglas", command=self.click)
+        myButton.pack()
+        root.mainloop()
 
     def pick_turn(self):
         f = font.Font(size=15)
         self.player_one_frame.pack_forget()
         self.player_two_frame.pack_forget()
+        self.especial_card_frame.pack_forget()
         self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
         self.myButtonFirst['font'] = f
         self.myButtonSecond = Button(root, text="Segundo", command=self.second_turn, width=25)
         self.myButtonSecond['font'] = f
         self.myButtonFirst.pack(pady = 5)
         self.myButtonSecond.pack(pady = 5)
-        self.flag = True
 
     def click(self):
         messagebox.showinfo("Reglas", self.reglas)
 
     def first_turn(self):
         messagebox.showinfo("Turno", "Tu turno es de Primero!")
-        self.player_one_frame.pack(padx=20, ipadx=20)
+        self.player_one_frame.pack(padx=10, ipadx=10)
         self.player_two_frame.pack(ipadx=10, pady=10) 
+        self.especial_card_frame.pack(padx=10, ipadx=10)
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
@@ -116,8 +122,9 @@ class Visual:
 
     def second_turn(self):
         messagebox.showinfo("Turno", "Tu turno es de Segundo!")
-        self.player_one_frame.pack(padx=20, ipadx=20)
+        self.player_one_frame.pack(padx=10, ipadx=10)
         self.player_two_frame.pack(ipadx=10, pady=10)  
+        self.especial_card_frame.pack(padx=10, ipadx=10)
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
@@ -156,20 +163,23 @@ class Visual:
 
          return card_image_final_player
 
-    def config_image(self, deck_player_one, deck_player_two):
+    def config_image(self, deck_player_one, deck_player_two, card):
         global card_image_final_player_one, card_image_final_player_two, card_image_final_player_three, card_image_final_player_four
         global card_image_final_player_five, card_image_final_player_six, card_image_final_player_seven, card_image_final_player_eight
         global card_image_final_player_nine, card_image_final_player_ten, card_image_final_player_eleven, card_image_final_player_twelve
+        global card_image_final_especial_card
+
+        card_image_player = Image.open(f'../cards/{card}.png')
+        card_resize_image_player = card_image_player.resize((150, 218))
+        card_image_final_especial_card = ImageTk.PhotoImage(card_resize_image_player)
+        self.especial_card_label.config(image=card_image_final_especial_card)
 
         for index in range(len(deck_player_one)):
             # Jugador 1
-            print("1", deck_player_one[index])
+            #print("1", deck_player_one[index])
 
             # Jugador 2
-            """card_image_player_two = Image.open(f'../cards/{deck_player_two[index]}.png')
-            card_resize_image_player_two = card_image_player_two.resize((150, 218))
-            card_image_final_player_two = ImageTk.PhotoImage(card_resize_image_player_two)"""
-            print("2", deck_player_two[index])
+            #print("2", deck_player_two[index])
 
             # Salida de la carta a la pantalla en forma de imagen
             if (index == 0):
