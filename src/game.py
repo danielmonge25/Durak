@@ -7,9 +7,13 @@ class Game(ABC):
     self.reglas = ""
     
   #esqueleto del juego
+  @abstractmethod
   def play(self) -> None:
     pass
 
+  @abstractmethod
+  def draw(self) -> None:
+    pass
 
   @abstractmethod
   def next_turn(self) -> None:

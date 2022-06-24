@@ -21,7 +21,7 @@ class Cards:
         #print(self.deck)
         #print(len(self.deck))
 
-    def deal_cards(self, amount_cards):
+    """def deal_cards(self, amount_cards):
         for index in range(amount_cards*2):
             if (index <= 5):
                 card = random.choice(self.deck)
@@ -30,7 +30,11 @@ class Cards:
             else:
                 card = random.choice(self.deck)
                 self.deck.remove(card)
-                self.deck_player_two.append(card)
+                self.deck_player_two.append(card)"""
+    def deal_cards(self):
+        card = random.choice(self.deck)
+        self.deck.remove(card)
+        return card
 
     def choice_card(self, player):
         if (player == 0): # Jugador 1 (Atacante)
