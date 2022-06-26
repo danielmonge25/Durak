@@ -5,7 +5,7 @@
 - Fernando Agüero Cordero B60086
 - Daniel Monge Arce B85017
 - André Villegas Gallardo B98556
-- Alejandro
+- Alejandro Sanchez Fong
 
 # Instalación de prerrequisitos para Windows
 
