@@ -12,7 +12,7 @@
 1. Descargar e instalar python usando el link: https://www.python.org/downloads/
 2. Abrir cmd y correr el comando `pip install pillow`
 
-# Como correr el programa:
+# Cómo correr el programa:
 
 1. Descargar el código fuente 
 2. Abrir cmd y navegar a la carpeta del código fuente
