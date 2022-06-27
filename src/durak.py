@@ -7,7 +7,7 @@ Creado el 26 de Junio del 2022
 from game import Game
 
 from visual import Visual
-from cards import Cards
+from deck import deck
 from player import player
 
 class durak(Game):
@@ -21,7 +21,7 @@ class durak(Game):
       """
 
       # Creacion del mazo
-      cards = Cards()
+      cards = deck()
       cards.createDeck()
       # Creacion de objetos
       visual = Visual(self.reglas, cards.deck)

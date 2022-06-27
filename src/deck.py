@@ -6,7 +6,7 @@ Creado el 26 de Junio del 2022
 
 import random
 
-class Cards:
+class deck:
     def __init__(self):
         """
             Constructor de la clase Cards
