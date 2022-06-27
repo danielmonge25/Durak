@@ -20,7 +20,7 @@
 
 # Cómo correr el programa:
 
-1. Descargar el código fuente 
+1. Descargar la ultima versión del código fuente 
 2. Abrir cmd y navegar a la carpeta del código fuente
 3. Navegar a el directorio src 
 4. Ejecutar el programa con el comando `python main.py`
