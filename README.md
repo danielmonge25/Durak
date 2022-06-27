@@ -14,9 +14,10 @@
 
 # Instalación de prerrequisitos para Linux
 
-1. Instalar python3-tk
-2. Instalar python3-pil
-3. Instalar python3-pil.imagetk
+1. Descargar e instalar python abriendo la cmd y correr el comando `sudo apt-get install python3.7`
+2. Abrir cmd y correr el comando `python3-tk`
+3. Abrir cmd y correr el comando `python3-pil`
+4. Abrir cmd y correr el comando `python3-pil.imagetk`
 
 # Cómo correr el programa:
 
