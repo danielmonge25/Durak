@@ -34,7 +34,7 @@ class durak(Game):
 
       visual.pick_turn()
 
-      self.draw(self, cards, visual, player_one, player_two)
+      self.draw(self, cards, player_one, player_two)
 
       if (player_one.get_size_hand() == 6):
          visual.config_image(player_one.get_hand(), player_two.get_hand(), card)
@@ -50,12 +50,11 @@ class durak(Game):
 
       return cards.deal_cards()
 
-   def draw(self, cards, visual, player_one, player_two):
+   def draw(self, cards, player_one, player_two):
       """
          Reparte las cartas a los jugadores
 
          El parametro cards debe ser un objeto (El objeto es tipo mazo)
-         El parametro visual debe ser un objeto (El objeto es tipo visual)
          El parametro player_one debe ser un objeto (El objeto es tipo player)
          El parametro player_two debe ser un objeto (El objeto es tipo player)
 
