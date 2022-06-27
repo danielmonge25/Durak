@@ -12,6 +12,12 @@
 1. Descargar e instalar python usando el link: https://www.python.org/downloads/
 2. Abrir cmd y correr el comando `pip install pillow`
 
+# Instalación de prerrequisitos para Linux
+
+1. Instalar python3-tk
+2. Instalar python3-pil
+3. Instalar python3-pil.imagetk
+
 # Cómo correr el programa:
 
 1. Descargar el código fuente 

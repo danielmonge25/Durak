@@ -250,7 +250,9 @@ class Visual:
         #cad_button.config(state="disabled")
 
     def clean_old_cards(self):
-        """
+        """ 
+            No utilizado aun
+            
             Limpia la imagen de las cartas de ambos jugadores
 
             Esta funcion no retorna nada

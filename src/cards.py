@@ -44,6 +44,8 @@ class Cards:
 
     def choice_card(self, player):
         """
+            No utilizado aun
+
             Elige una carta de la mano del jugador
 
             El parametro player debe ser un entero (0 es jugadr 1, 1 es jugador 2)
@@ -61,7 +63,9 @@ class Cards:
         return card
 
     def save_number_card(self, card, player):
-        """
+        """ 
+            No utilizado aun
+            
             Guarda el numero de la carta para luego comparar y saber quien gana la ronda
 
             El parametro player debe ser un entero (0 es jugadr 1, 1 es jugador 2)
