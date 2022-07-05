@@ -93,7 +93,29 @@ class Visual:
 
         self.player_two_label_6 = Label(self.player_two_frame, text='')
         self.player_two_label_6.grid(row=1, column=5, pady=20, padx=20)
-    
+
+         # Creacion del frame de los botones de las cartas
+        self.button_frame = Frame(root, bg="green")
+        self.button_frame.pack(pady=20)
+
+        # Creacion de los botones de las cartas
+        self.card1 = Button(self.button_frame, text="Primera carta")
+        self.card1.grid(row=0, column=0)
+        
+        self.card2 = Button(self.button_frame, text="Segunda carta")
+        self.card2.grid(row=0, column=1, padx=20)
+
+        self.card3 = Button(self.button_frame, text="Tercera carta")
+        self.card3.grid(row=0, column=2, padx=20)
+
+        self.card4 = Button(self.button_frame, text="Cuarta carta")
+        self.card4.grid(row=0, column=3, padx=20)
+
+        self.card5 = Button(self.button_frame, text="Quinta carta")
+        self.card5.grid(row=0, column=4, padx=20)
+
+        self.card6 = Button(self.button_frame, text="Sexta carta")
+        self.card6.grid(row=0, column=5, padx=20)
  
     def show_game(self):
         """
@@ -116,6 +138,8 @@ class Visual:
         self.player_one_frame.pack_forget()
         self.player_two_frame.pack_forget()
         self.especial_card_frame.pack_forget()
+        self.button_frame.pack_forget()
+
         self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
         self.myButtonFirst['font'] = f
         self.myButtonSecond = Button(root, text="Segundo", command=self.second_turn, width=25)
@@ -132,6 +156,9 @@ class Visual:
 
         messagebox.showinfo("Reglas", self.reglas)
 
+    def show_buttons_cards(self):
+        self.button_frame.pack(pady=20)
+
     def first_turn(self):
         """
             Muestra la mano del primer jugador
@@ -145,6 +172,10 @@ class Visual:
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
+
+        # Muestra los botones de las cartas
+        self.show_buttons_cards()
+        
          
 
     def second_turn(self):
@@ -160,6 +191,9 @@ class Visual:
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
+
+        # Muestra los botones de las cartas
+        self.show_buttons_cards()
 
     def resize_cards(self, deck_player, index):
         """
