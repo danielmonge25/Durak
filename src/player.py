@@ -13,7 +13,11 @@ class player:
         """
 
         self.hand = []
+    
+    def remove_card(self, index):
+        self.hand.remove(self.hand[index])
 
+    
     def append_card(self, card):
         """
             Guarda una carta a la mano del jugador

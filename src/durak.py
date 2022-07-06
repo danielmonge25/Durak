@@ -24,26 +24,27 @@ class durak(Game):
       cards = deck()
       cards.createDeck()
 
-      # Creacion de objetos
-      visual = Visual(self.reglas, cards.deck)
+      # Creacion de los jugadores
       player_one = player()
       player_two = player()
 
-      # Establece las reglas del juego
-      visual.set_reglas(self.reglas)
-
-      # Selecciona la ccarta especial
+      # Selecciona la carta especial
       card = self.select_especial_card(cards)
-
-      # Elige quien va de primero
-      visual.pick_turn()
 
       # Reparte las cartas
       self.draw(self, cards, player_one, player_two)
 
+      visual = Visual(self.reglas, cards.deck, player_one, player_two)
+
       # Establece las imagenes de las cartas
       if (player_one.get_size_hand() == 6):
          visual.config_image(player_one.get_hand(), player_two.get_hand(), card)
+
+      # Establece las reglas del juego
+      visual.set_reglas(self.reglas)
+
+      # Elige quien va de primero
+      visual.pick_turn()
 
       # Muestra el juego
       visual.show_game()
@@ -79,8 +80,8 @@ class durak(Game):
                   player_two.append_card(card)
       # Caso en que quedan menos de 12 cartas para repartir
       elif (player_one.get_size_hand() == 0) or (player_two.get_size_hand() == 0) and len(cards.deck) < 12:
-            for index in range(2*2):
-               if (index <= 2):
+            for index in range(1):
+               if (index == 0):
                   card = cards.deal_cards()
                   player_one.append_card(card)
                else:
