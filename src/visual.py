@@ -98,7 +98,8 @@ class Visual:
         self.player_two_label_6 = Label(self.player_two_frame, text='')
         self.player_two_label_6.grid(row=1, column=5, pady=20, padx=20)
 
-         # Creacion del frame de los botones de las cartas
+
+        # Creacion del frame de los botones de las cartas
         self.button_frame = Frame(root, bg="green")
         self.button_frame.pack(pady=20)
 
@@ -108,7 +109,7 @@ class Visual:
         self.card1 = Button(self.button_frame, text="Primera carta", command=lambda: self.first_card(player_one, player_two))
         self.card1.grid(row=0, column=0)
         
-        self.card2 = Button(self.button_frame, text="Segunda carta")
+        self.card2 = Button(self.button_frame, text="Segunda carta", command=lambda: self.second_card( player_one, player_two))
         self.card2.grid(row=0, column=1, padx=20)
 
         self.card3 = Button(self.button_frame, text="Tercera carta")
@@ -127,7 +128,7 @@ class Visual:
         self.card1_two = Button(self.button_frame, text="Primera carta", command=lambda: self.first_card(player_one, player_two))
         self.card1_two.grid(row=0, column=0)
         
-        self.card2_two = Button(self.button_frame, text="Segunda carta")
+        self.card2_two = Button(self.button_frame, text="Segunda carta", command=lambda: self.second_card( player_one, player_two))
         self.card2_two.grid(row=0, column=1, padx=20)
 
         self.card3_two = Button(self.button_frame, text="Tercera carta")
@@ -142,15 +143,104 @@ class Visual:
         self.card6_two = Button(self.button_frame, text="Sexta carta")
         self.card6_two.grid(row=0, column=5, padx=20)
 
+        # Creacion de los botones para saber quien va primero
+        f = font.Font(size=15)
+        self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
+        self.myButtonFirst['font'] = f
+        self.myButtonSecond = Button(root, text="Segundo", command=self.second_turn, width=25)
+        self.myButtonSecond['font'] = f
+        self.myButtonFirst.pack(pady = 5)
+        self.myButtonSecond.pack(pady = 5)
+
+        # Creacion del frame de los botones de quien va primero
+        self.button_options_frame = Frame(root, bg="green")
+        self.button_options_frame.pack(pady=20)
+
+        # Boton de las reglas
+        myButton = Button(self.button_options_frame, text="Mostrar Reglas", command=self.click)
+        myButton.grid(row=1, column=0, padx=20)
+
+        self.save_button = Button(self.button_options_frame, text="Guardar juego", command=self.click_save_button)
+        self.save_button.grid(row=1, column=1, padx=20)
+
         self.card = 0
-    
+
+    def click_save_button(self):
+       self.game.save_game()
+       root.destroy()
+     
     def set_game(self, durak_game):
         self.game = durak_game 
+
+    def hide_buttons_player_one(self):
+        if (self.count_player_one == 1):
+            self.player_one_label_1.grid_forget()
+            self.card6.grid_forget()
+        elif (self.count_player_one == 2):
+            self.player_one_label_2.grid_forget()
+            self.card5.grid_forget()
+        elif (self.count_player_one == 3):
+            self.player_one_label_3.grid_forget()
+            self.card4.grid_forget()
+        elif (self.count_player_one == 4):
+            self.player_one_label_4.grid_forget()
+            self.card3.grid_forget()
+        elif (self.count_player_one == 5):
+            self.player_one_label_5.grid_forget()
+            self.card2.grid_forget()
+
+    def hide_buttons_player_two(self):
+        if (self.count_player_two == 1):
+            self.player_two_label_1.grid_forget()
+            self.card6_two.grid_forget()
+        elif (self.count_player_two == 2):
+            self.player_two_label_2.grid_forget()
+            self.card5_two.grid_forget()
+        elif (self.count_player_two == 3):
+            self.player_two_label_3.grid_forget()
+            self.card4_two.grid_forget()
+        elif (self.count_player_two == 4):
+            self.player_two_label_4.grid_forget()
+            self.card3_two.grid_forget()
+        elif (self.count_player_two == 5):
+            self.player_two_label_5.grid_forget()
+            self.card2_two.grid_forget()
 
     def first_card(self, player_one, player_two):
         if self.player == 1:
             print("Antes 1", player_one.get_hand())
             player_one.remove_card(0)
+
+            self.player_one_frame.pack_forget()
+
+            self.player_two_frame.pack(ipadx=10, pady=10) 
+
+            print("Despues 1", player_one.get_hand())
+
+            self.player = 2
+            self.count_player_one =  self.count_player_one + 1
+
+            self.hide_buttons_player_one()
+        else:
+            print("Antes 2", player_two.get_hand())
+            player_two.remove_card(0)
+        
+            self.player_two_frame.pack_forget()
+
+            self.player_one_frame.pack(ipadx=10, pady=10)
+
+            print("Despues 2", player_two.get_hand())
+
+            self.player = 1
+            self.count_player_two =  self.count_player_two + 1
+
+            self.hide_buttons_player_two()
+        self.game.verify_turn()
+    
+    def second_card(self, player_one, player_two):
+        if self.player == 1:
+            print("Antes 1", player_one.get_hand())
+            player_one.remove_card(1)
 
             self.player_one_frame.pack_forget()
 
@@ -179,7 +269,7 @@ class Visual:
 
         else:
             print("Antes 2", player_two.get_hand())
-            player_two.remove_card(0)
+            player_two.remove_card(1)
         
             self.player_two_frame.pack_forget()
 
@@ -207,7 +297,7 @@ class Visual:
                 self.card2_two.grid_forget()
     
         self.game.verify_turn()
-    
+
     def show_winner(self, player_name):
         messagebox.showinfo("Ganador", "El jugador 2 gano esta ronda")
 
@@ -218,29 +308,20 @@ class Visual:
             Esta funcion no retorna nada
         """
 
-        myButton = Button(root, text="Mostrar Reglas", command=self.click)
-        myButton.pack()
-
         root.mainloop()
 
     def pick_turn(self):
         """
-            Muestra las opciones para elegir quien va primero
+            Oculta todo lo que no sea relacionado a las opciones para elegir quien va primero
 
-            Esta funcion no retorna nada
+            Esta funcion retorna el jugador que va primero
         """
-        f = font.Font(size=15)
         self.player_one_frame.pack_forget()
         self.player_two_frame.pack_forget()
         self.especial_card_frame.pack_forget()
         self.button_frame.pack_forget()
 
-        self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
-        self.myButtonFirst['font'] = f
-        self.myButtonSecond = Button(root, text="Segundo", command=self.second_turn, width=25)
-        self.myButtonSecond['font'] = f
-        self.myButtonFirst.pack(pady = 5)
-        self.myButtonSecond.pack(pady = 5)
+        self.save_button.grid_forget()
 
         return self.player
 
@@ -253,6 +334,9 @@ class Visual:
 
         messagebox.showinfo("Reglas", self.reglas)
 
+    def show_save_button(self):
+        self.save_button.grid(row=1, column=1, padx=20)
+    
     def show_buttons_cards(self):
         self.button_frame.pack(pady=20)
 
@@ -273,10 +357,11 @@ class Visual:
         # Muestra los botones de las cartas
         self.show_buttons_cards()
 
+        # Muestra el boton de guardar partida
+        self.show_save_button()
+
         self.player = 1
         
-         
-
     def second_turn(self):
         """
             Muestra la mano del primer jugador
@@ -293,6 +378,9 @@ class Visual:
 
         # Muestra los botones de las cartas
         self.show_buttons_cards()
+
+        # Muestra el boton de guardar partida
+        self.show_save_button()
 
         self.player = 2
 

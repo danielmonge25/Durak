@@ -57,8 +57,6 @@ class durak(Game):
       # Elige quien va de primero
       self.visual.pick_turn()
 
-      self.save_game()
-
       # Muestra el juego
       self.visual.show_game()
 
