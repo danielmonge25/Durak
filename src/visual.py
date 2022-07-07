@@ -10,7 +10,7 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 
 class Visual:
-    def __init__(self, reglas, deck, player_one, player_two):
+    def __init__(self, player_one, player_two):
         """
             Constructor de la clase visual
 
@@ -22,14 +22,14 @@ class Visual:
         
         global root
         root = Tk()
-        root.title(f'Durak game - {len(deck)} Cartas faltantes')
+        root.title(f'Durak game') # - {len(deck)} Cartas faltantes
         root.geometry("1200x800")
         root.configure(background="green")
 
         frame = Frame(root, bg="green")
         frame.pack(pady=20)
 
-        self.reglas = reglas
+        #self.reglas = reglas
 
         self.player = 0
 
@@ -121,9 +121,12 @@ class Visual:
 
         self.card = 0
     
+    def set_game(self, durak_game):
+        self.game = durak_game 
+
     def first_card(self, player_one, player_two):
         if self.player == 1:
-            #print(player_one.get_hand())
+            print(player_one.get_hand())
             player_one.remove_card(0)
 
             self.player_one_label_1.grid_forget()
@@ -131,7 +134,7 @@ class Visual:
 
             self.player_two_frame.pack(ipadx=10, pady=10) 
 
-            #print(player_one.get_hand())
+            print(player_one.get_hand())
 
             self.player = 2
         else:
@@ -142,8 +145,13 @@ class Visual:
 
             self.player_one_frame.pack(ipadx=10, pady=10) 
 
-            self.player = 2
+            self.player = 1
+        
+        self.game.verify_turn()
     
+    def show_winner(self, player_name):
+        messagebox.showinfo("Ganador", "El jugador 2 gano esta ronda")
+        
     def show_game(self):
         """
             Muestra la interfaz principal del juego

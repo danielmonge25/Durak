@@ -13,8 +13,14 @@ class player:
         """
 
         self.hand = []
+
+        self.value = 0
+
+        self.name = ""
     
     def remove_card(self, index):
+        self.value = int(self.hand[index].split("_", 1)[0])
+
         self.hand.remove(self.hand[index])
 
     
@@ -42,3 +48,16 @@ class player:
         """
 
         return self.hand
+
+    def get_value(self):
+        return self.value
+
+    def get_player_name(self):
+        return self.name
+
+    def set_value(self, value):
+        self.value = value
+    
+    def set_player_name(self, name):
+        self.name = name
+
