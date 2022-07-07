@@ -20,6 +20,9 @@ class deck:
 
         self.deck = []
 
+    def get_deck(self):
+        return self.deck
+    
     def createDeck(self):
         """
             Crea el mazo para el juego
