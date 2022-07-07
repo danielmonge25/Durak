@@ -58,8 +58,8 @@ class durak(Game):
    def verify_turn(self):
       if (self.player_one.get_value() and self.player_two.get_value() != 0):
          self.visual.show_winner(self.player_two.get_player_name())
-         self.self.player_one.set_value(0)
-         self.self.player_two.set_value(0)
+         self.player_one.set_value(0)
+         self.player_two.set_value(0)
 
       """elif (self.player_one.get_value() != 0 and self.player_two.get_value() == 0): # El defensor no tiene para defenderse
          # Roba seis cartas

@@ -33,6 +33,8 @@ class Visual:
 
         self.player = 0
 
+        self.count_player_one = 0
+        self.count_player_two = 0
         # Seleccion
 
         self.seleccion_frame = LabelFrame(frame, text="", bd=0, bg='green')
@@ -100,7 +102,9 @@ class Visual:
         self.button_frame = Frame(root, bg="green")
         self.button_frame.pack(pady=20)
 
-        # Creacion de los botones de las cartas
+        # Creacion de botones
+
+        # Botones para el jugador 1
         self.card1 = Button(self.button_frame, text="Primera carta", command=lambda: self.first_card(player_one, player_two))
         self.card1.grid(row=0, column=0)
         
@@ -119,6 +123,25 @@ class Visual:
         self.card6 = Button(self.button_frame, text="Sexta carta")
         self.card6.grid(row=0, column=5, padx=20)
 
+        # Botones para el jugador 2
+        self.card1_two = Button(self.button_frame, text="Primera carta", command=lambda: self.first_card(player_one, player_two))
+        self.card1_two.grid(row=0, column=0)
+        
+        self.card2_two = Button(self.button_frame, text="Segunda carta")
+        self.card2_two.grid(row=0, column=1, padx=20)
+
+        self.card3_two = Button(self.button_frame, text="Tercera carta")
+        self.card3_two.grid(row=0, column=2, padx=20)
+
+        self.card4_two = Button(self.button_frame, text="Cuarta carta")
+        self.card4_two.grid(row=0, column=3, padx=20)
+
+        self.card5_two = Button(self.button_frame, text="Quinta carta")
+        self.card5_two.grid(row=0, column=4, padx=20)
+
+        self.card6_two = Button(self.button_frame, text="Sexta carta")
+        self.card6_two.grid(row=0, column=5, padx=20)
+
         self.card = 0
     
     def set_game(self, durak_game):
@@ -126,32 +149,68 @@ class Visual:
 
     def first_card(self, player_one, player_two):
         if self.player == 1:
-            print(player_one.get_hand())
+            print("Antes 1", player_one.get_hand())
             player_one.remove_card(0)
 
-            self.player_one_label_1.grid_forget()
             self.player_one_frame.pack_forget()
 
             self.player_two_frame.pack(ipadx=10, pady=10) 
 
-            print(player_one.get_hand())
+            print("Despues 1", player_one.get_hand())
 
             self.player = 2
-        else:
-            player_two.remove_card(0)
+            self.count_player_one =  self.count_player_one + 1
 
-            self.player_two_label_1.grid_forget()
+            if (self.count_player_one == 1):
+                self.player_one_label_1.grid_forget()
+                self.card6.grid_forget()
+            elif (self.count_player_one == 2):
+                self.player_one_label_2.grid_forget()
+                self.card5.grid_forget()
+            elif (self.count_player_one == 3):
+                self.player_one_label_3.grid_forget()
+                self.card4.grid_forget()
+            elif (self.count_player_one == 4):
+                self.player_one_label_4.grid_forget()
+                self.card3.grid_forget()
+            elif (self.count_player_one == 5):
+                self.player_one_label_5.grid_forget()
+                self.card2.grid_forget()
+
+        else:
+            print("Antes 2", player_two.get_hand())
+            player_two.remove_card(0)
+        
             self.player_two_frame.pack_forget()
 
-            self.player_one_frame.pack(ipadx=10, pady=10) 
+            self.player_one_frame.pack(ipadx=10, pady=10)
+
+            print("Despues 2", player_two.get_hand())
 
             self.player = 1
-        
+            self.count_player_two =  self.count_player_two + 1
+
+            if (self.count_player_two == 1):
+                self.player_two_label_1.grid_forget()
+                self.card6_two.grid_forget()
+            elif (self.count_player_two == 2):
+                self.player_two_label_2.grid_forget()
+                self.card5_two.grid_forget()
+            elif (self.count_player_two == 3):
+                self.player_two_label_3.grid_forget()
+                self.card4_two.grid_forget()
+            elif (self.count_player_two == 4):
+                self.player_two_label_4.grid_forget()
+                self.card3_two.grid_forget()
+            elif (self.count_player_two == 5):
+                self.player_two_label_5.grid_forget()
+                self.card2_two.grid_forget()
+    
         self.game.verify_turn()
     
     def show_winner(self, player_name):
         messagebox.showinfo("Ganador", "El jugador 2 gano esta ronda")
-        
+
     def show_game(self):
         """
             Muestra la interfaz principal del juego
