@@ -177,8 +177,13 @@ class Visual:
         self.card = 0
     
     def player_one_winner(self):
+         messagebox.showinfo("Victoria", "El jugador 2 gano la partida")
+         root.destroy()
+
+    def player_one_winner(self):
          messagebox.showinfo("Victoria", "El jugador 1 gano la partida")
-         
+         root.destroy()
+
     def show_labels_buttons(self):
         # Para el jugador 1
         self.player_one_label_1.grid(row=0, column=0, pady=10, padx = 20)

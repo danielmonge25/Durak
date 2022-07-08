@@ -60,6 +60,9 @@ class player:
     def set_hand(self, hand):
         self.hand = hand.copy()
 
+    def get_len_hand(self):
+        return len(self.hand)
+    
     def get_value(self):
         return self.value
 

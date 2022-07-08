@@ -61,6 +61,10 @@ class durak(Game):
       # Muestra el juego
       self.visual.show_game()
    
+   def verify_turn(self):
+      if (self.player_one.get_len_hand() == 0 and self.player_two.get_len_hand() == 0):
+         self.visual.player_two_winner()
+      
    def next_round(self):
       self.sum_score()
       if (self.cards.get_len_deck() == 3):
