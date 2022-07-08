@@ -74,6 +74,14 @@ class Visual:
         self.played_card_label = Label(self.played_card_frame, text='')
         self.played_card_label.pack(pady=20)
         
+        #Creacion de los botones para saber quien va primero
+        f = font.Font(size=15)
+        self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
+        self.myButtonFirst['font'] = f
+        self.myButtonSecond = Button(root, text="Segundo", command=self.first_turn, width=25) #second_turn
+        self.myButtonSecond['font'] = f
+        self.myButtonFirst.pack(pady = 5)
+        self.myButtonSecond.pack(pady = 5)
         # Coloca las cartas en la imagen
 
         # Para el jugador 1
@@ -175,23 +183,14 @@ class Visual:
         self.helpButton.grid(row=1, column=0, padx=20)
 
          # Crea frame de menu
-        self.seleccion_frame = LabelFrame(frame, text="", bd=0, bg='green')
+        """self.seleccion_frame = LabelFrame(frame, text="", bd=0, bg='green')
         self.seleccion_frame.pack(padx=10, ipadx=20)
         self.seleccion_label = Label(self.seleccion_frame, text='Seleccione su turno', font=("Arial", 20), bg='green')
-        self.seleccion_label.grid(row=0, column=0, pady=10, padx = 20)
-
-        # Creacion de los botones para saber quien va primero
-        f = font.Font(size=15)
-        self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
-        self.myButtonFirst['font'] = f
-        self.myButtonSecond = Button(root, text="Segundo", command=self.first_turn, width=25) #second_turn
-        self.myButtonSecond['font'] = f
-        self.myButtonFirst.pack(pady = 5)
-        self.myButtonSecond.pack(pady = 5)
+        self.seleccion_label.grid(row=0, column=0, pady=10, padx = 20)"""
 
         # Boton para cargar juego
-        self.load_button = Button(self.seleccion_frame, text="Cargar juego", command=self.click_load_button)
-        self.load_button.grid(row=2, column=0, padx=20, pady=10)
+        self.load_button = Button(self.button_options_frame, text="Cargar juego", command=self.click_load_button)
+        self.load_button.grid(row=1, column= 1, padx=20, pady=10)
 
         # Boton para rendirse
         self.surrender_button = Button(self.button_options_frame, text="Rendirse", command=self.surrender)
@@ -466,6 +465,8 @@ class Visual:
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
+        
+        self.load_button.grid_forget()
 
         # Muestra los botones de las cartas
         self.show_buttons_cards()
@@ -490,6 +491,8 @@ class Visual:
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
 
+        self.load_button.grid_forget()
+        
         # Muestra los botones de las cartas
         self.show_buttons_cards()
 

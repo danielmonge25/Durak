@@ -148,12 +148,10 @@ class durak(Game):
             for line in file:
               if(counter == 0):
                 player = line[0]
-                file.readline()
 
               elif(counter == 1):
                 line = line.rstrip()
                 deck = line.split(',')
-                file.readline()
 
               elif(counter == 2):
                 line = line.rstrip()
@@ -161,7 +159,6 @@ class durak(Game):
                   player_one_hand = line.split(',')
                 else:
                   player_two_hand = line.split(',')
-                file.readline()
 
               elif(counter == 3):
                 line = line.rstrip()
@@ -171,11 +168,13 @@ class durak(Game):
                   player_one_hand = line.split(',')
 
               elif(counter == 4):
-                special_card = file.readline()
-                special_card = special_card.rstrip()
+               # special_card = file.readline()
+               special_card = line.rstrip()
 
               counter += 1
-
+            print(special_card)
+            print(player_one_hand)
+            print(player_two_hand)
             self.set_deck(deck)
             self.player_one.set_hand(player_one_hand)
             self.player_two.set_hand(player_two_hand)
