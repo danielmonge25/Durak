@@ -62,14 +62,18 @@ class durak(Game):
    
    def next_round(self):
       self.sum_score()
-      self.player_one.clean_hand()
-      self.player_two.clean_hand()
-      self.draw()
-      print("deck", self.cards.get_deck())
-      print("h1", self.player_one.get_hand())
-      print("h2", self.player_two.get_hand())
-      self.visual.config_image(self.player_one.get_hand(), self.player_two.get_hand(), self.especial_card)
-      self.visual.show_labels()
+      if (self.cards.get_len_deck() == 3):
+         if (self.score_player_one >  self.score_player_two):
+            self.visual.player_one_winner()
+      else:
+         self.player_one.clean_hand()
+         self.player_two.clean_hand()
+         self.draw()
+         print("deck", self.cards.get_deck())
+         print("h1", self.player_one.get_hand())
+         print("h2", self.player_two.get_hand())
+         self.visual.config_image(self.player_one.get_hand(), self.player_two.get_hand(), self.especial_card)
+         self.visual.show_labels_buttons()
       
    def sum_score(self):
       self.score_player_one = self.score_player_one + 1
@@ -153,14 +157,14 @@ class durak(Game):
                   card = self.cards.deal_cards()
                   self.player_two.append_card(card)
       # Caso en que quedan menos de 12 cartas para repartir
-      elif (self.player_one.get_size_hand() == 0) or (self.player_two.get_size_hand() == 0) and len(self.cards.deck) < 12:
+      """elif (self.player_one.get_size_hand() == 0) or (self.player_two.get_size_hand() == 0) and len(self.cards.deck) < 12:
             for index in range(1):
                if (index == 0):
                   card = self.cards.deal_cards()
                   self.player_one.append_card(card)
                else:
                   card = self.cards.deal_cards()
-                  self.player_two.append_card(card)
+                  self.player_two.append_card(card) # 1 + 12 = 13 + 12 = 25 + 12 + = 37 + 12 = 49"""
       
    def next_turn(self):
       """

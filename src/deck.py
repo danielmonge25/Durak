@@ -20,6 +20,9 @@ class deck:
 
         self.deck = []
 
+    def get_len_deck(self):
+        return len(self.deck)
+    
     def get_deck(self):
         return self.deck
     

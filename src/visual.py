@@ -173,7 +173,10 @@ class Visual:
 
         self.card = 0
     
-    def show_labels(self):
+    def player_one_winner(self):
+         messagebox.showinfo("Victoria", "El jugador 1 gano la partida")
+         
+    def show_labels_buttons(self):
         # Para el jugador 1
         self.player_one_label_1.grid(row=0, column=0, pady=20, padx = 20)
         self.player_one_label_2.grid(row=0, column=1, pady=20, padx = 20)
@@ -190,8 +193,49 @@ class Visual:
         self.player_two_label_5.grid(row=1, column=4, pady=20, padx=20)
         self.player_two_label_6.grid(row=1, column=5, pady=20, padx=20)
 
+        self.card1.grid(row=0, column=0)
+        
+        self.card2.grid(row=0, column=1, padx=20)
+
+        self.card3.grid(row=0, column=2, padx=20)
+
+        self.card4.grid(row=0, column=3, padx=20)
+
+        self.card5.grid(row=0, column=4, padx=20)
+
+        self.card6.grid(row=0, column=5, padx=20)
+
+        # Botones para el jugador 2
+        self.card1_two.grid(row=0, column=0)
+        
+        self.card2_two.grid(row=0, column=1, padx=20)
+
+        self.card3_two.grid(row=0, column=2, padx=20)
+
+        self.card4_two.grid(row=0, column=3, padx=20)
+
+        self.card5_two.grid(row=0, column=4, padx=20)
+
+        self.card6_two.grid(row=0, column=5, padx=20)
+
     def surrender(self):
         self.game.next_round()
+        
+        # Quita y agrega botones
+        self.player_two_frame.pack_forget()
+        self.button_two_frame.pack_forget()
+        self.surrender_button.grid_forget()
+
+
+        self.button_frame.pack(pady=20)
+        self.player_one_frame.pack(ipadx=10, pady=10)
+
+        self.player = 1
+        self.count_player_two = 0
+        self.count_player_one = 0
+
+        print("deck", self.game.cards.get_deck())
+
 
     def click_save_button(self):
        self.game.save_game()
