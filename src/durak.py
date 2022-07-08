@@ -57,12 +57,26 @@ class durak(Game):
 
       # Muestra el juego
       self.visual.show_game()
+   
+   def reset_values(self):
+      self.player_one.set_value(0)
+      self.player_two.set_value(0)
 
-   def verify_turn(self, index):
-      suit_player_two = self.get_suit(self.player_two.get_hand()[index]) # 5_of_clues
+   def verify_number(self):
+      print("o", self.player_one.get_value())
+      print("t", self.player_two.get_value())
+      if (self.player_one.get_value() <= self.player_two.get_value()):
+         return True
+      else:
+         return False
+
+   def verify_suit(self, index):
+      # Verifica si son del mismo tipo 
+      suit_player_two = self.get_suit(self.player_two.get_hand()[index])
+      print("c", self.especial_card)
       print("a", suit_player_two)
       print("b", self.player_one.get_playing_card())
-      if suit_player_two in self.player_one.get_playing_card():
+      if suit_player_two in self.player_one.get_playing_card() or suit_player_two in self.especial_card:
          return True
       else:
          return False
@@ -91,19 +105,7 @@ class durak(Game):
          special_card_list = []
          special_card_list.append(self.especial_card)
          write.writerow( special_card_list)
-   
-   def calculate_winner(self):
-      if (self.player_one.get_value() and self.player_two.get_value() != 0):
-         self.visual.show_winner(self.player_two.get_player_name())
-         self.player_one.set_value(0)
-         self.player_two.set_value(0)
 
-      """elif (self.player_one.get_value() != 0 and self.player_two.get_value() == 0): # El defensor no tiene para defenderse
-         # Roba seis cartas
-         print("HOla")
-      elif (self.player_one.get_value() == 0 and self.player_two.get_value() == 0): # Caso en que el atacante no tiene para atacar
-         # ROba seis cartas
-         print("HOla")"""
 
    def select_especial_card(self):
       """

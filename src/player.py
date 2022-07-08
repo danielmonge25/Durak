@@ -24,11 +24,8 @@ class player:
 
         self.playing_card = self.hand[index]
 
-        self.value = int(self.hand[index].split("_", 1)[0])
-
         self.hand.remove(self.hand[index])
 
-    
     def append_card(self, card):
         """
             Guarda una carta a la mano del jugador
@@ -42,7 +39,7 @@ class player:
     
     def get_playing_card(self):
         return self.playing_card
-        
+
     def get_size_hand(self):
         """
             Esta funcion devuelve el tamanyo de la mano del jugador
@@ -62,6 +59,9 @@ class player:
 
     def get_player_name(self):
         return self.name
+
+    def set_value_hand(self, index):
+        self.value = int(self.hand[index].split("_", 1)[0])
 
     def set_value(self, value):
         self.value = value

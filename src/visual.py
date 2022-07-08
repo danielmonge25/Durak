@@ -181,6 +181,7 @@ class Visual:
         if self.player == 1: # Atacante
             print("Antes 1", player_one.get_hand())
 
+            player_one.set_value_hand(index)
             # Saca la carta de la mano
             player_one.remove_card(index)
 
@@ -228,58 +229,62 @@ class Visual:
                 self.count_player_one = self.count_player_one + 1
         else: # Defensor
 
-            if (self.game.verify_turn(index) == True): # 5 1 6 8 9
+            if (self.game.verify_suit(index) == True): 
+                player_two.set_value_hand(index)
+                if(self.game.verify_number() == True):
+                    print("Antes 2", player_two.get_hand())
+                    player_two.remove_card(index)
+                
+                    self.player_two_frame.pack_forget()
+                    self.button_two_frame.pack_forget()
 
-                print("Antes 2", player_two.get_hand())
-                player_two.remove_card(index)
-            
-                self.player_two_frame.pack_forget()
-                self.button_two_frame.pack_forget()
+                    self.button_frame.pack(pady=20)
+                    self.player_one_frame.pack(ipadx=10, pady=10)
 
-                self.button_frame.pack(pady=20)
-                self.player_one_frame.pack(ipadx=10, pady=10)
+                    print("Despues 2", player_two.get_hand())
 
-                print("Despues 2", player_two.get_hand())
+                    self.player = 1
 
-                self.player = 1
+                    self.config_image(player_one.get_hand(), player_two.get_hand(), self.game.get_special_card())
 
-                self.config_image(player_one.get_hand(), player_two.get_hand(), self.game.get_special_card())
+                    if (self.count_player_two == 0):  
+                        self.player_two_label_6.grid_forget()  
+                        self.card6_two.grid_forget()
+                        self.count_player_two = self.count_player_two + 1
 
-                if (self.count_player_two == 0):  
-                    self.player_two_label_6.grid_forget()  
-                    self.card6_two.grid_forget()
-                    self.count_player_two = self.count_player_two + 1
+                    elif (self.count_player_two == 1):
+                        self.player_two_label_5.grid_forget()
+                        self.card5_two.grid_forget()
+                        self.count_player_two = self.count_player_two + 1
 
-                elif (self.count_player_two == 1):
-                    self.player_two_label_5.grid_forget()
-                    self.card5_two.grid_forget()
-                    self.count_player_two = self.count_player_two + 1
+                    elif (self.count_player_two == 2):
+                        self.player_two_label_4.grid_forget()
+                        self.card4_two.grid_forget()
+                        self.count_player_two = self.count_player_two + 1
 
-                elif (self.count_player_two == 2):
-                    self.player_two_label_4.grid_forget()
-                    self.card4_two.grid_forget()
-                    self.count_player_two = self.count_player_two + 1
+                    elif (self.count_player_two == 3):
+                        self.player_two_label_3.grid_forget()
+                        self.card3_two.grid_forget()
+                        self.count_player_two = self.count_player_two + 1
 
-                elif (self.count_player_two == 3):
-                    self.player_two_label_3.grid_forget()
-                    self.card3_two.grid_forget()
-                    self.count_player_two = self.count_player_two + 1
+                    elif (self.count_player_two == 4):
+                        self.player_two_label_2.grid_forget()
+                        self.card2_two.grid_forget()
+                        self.count_player_two = self.count_player_two + 1
 
-                elif (self.count_player_two == 4):
-                    self.player_two_label_2.grid_forget()
-                    self.card2_two.grid_forget()
-                    self.count_player_two = self.count_player_two + 1
+                    elif (self.count_player_two == 5):
+                        self.player_two_label_1.grid_forget()
+                        self.card1_two.grid_forget()
+                        self.count_player_two = self.count_player_two + 1
 
-                elif (self.count_player_two == 5):
-                    self.player_two_label_1.grid_forget()
-                    self.card1_two.grid_forget()
-                    self.count_player_two = self.count_player_two + 1
-
-                self.game.calculate_winner()
+                    self.show_winner()
+                    self.game.reset_values()
+                else:
+                    messagebox.showinfo("Restriccion", "Se debe jugar una carta mayor")
             else: 
                 messagebox.showinfo("Restriccion", "Se debe jugar el mismo palo")
 
-    def show_winner(self, player_name):
+    def show_winner(self):
         messagebox.showinfo("Ganador", "El jugador 2 gano esta ronda")
 
     def show_game(self):
