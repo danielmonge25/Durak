@@ -58,6 +58,26 @@ class durak(Game):
       # Muestra el juego
       self.visual.show_game()
 
+   def verify_turn(self, index):
+      suit_player_two = self.get_suit(self.player_two.get_hand()[index]) # 5_of_clues
+      print("a", suit_player_two)
+      print("b", self.player_one.get_playing_card())
+      if suit_player_two in self.player_one.get_playing_card():
+         return True
+      else:
+         return False
+      
+   def get_suit(self, string):
+      self.suit = ""
+      suits = ["spades", "clubs", "hearts", "diamonds"]
+
+      for x in suits:
+         if x in string:
+            self.suit = x
+            break
+      
+      return self.suit
+
    def get_special_card(self):
       return self.especial_card
    
@@ -72,7 +92,7 @@ class durak(Game):
          special_card_list.append(self.especial_card)
          write.writerow( special_card_list)
    
-   def verify_turn(self):
+   def calculate_winner(self):
       if (self.player_one.get_value() and self.player_two.get_value() != 0):
          self.visual.show_winner(self.player_two.get_player_name())
          self.player_one.set_value(0)

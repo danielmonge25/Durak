@@ -1,7 +1,7 @@
 '''
 Creado el 26 de Junio del 2022
 
-@autores: Fernando Aguero, Daniel MOnge, Alejandro Sanchez, Andre Villegas
+@autores: Fernando Aguero, Daniel Monge, Alejandro Sanchez, Andre Villegas
 '''
 
 from durak import durak
