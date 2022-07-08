@@ -1,5 +1,5 @@
 '''
-Creado el 26 de Junio del 2022
+Creado el 26 de Junio del 2022 
 
 @autores: Fernando Aguero, Daniel MOnge, Alejandro Sanchez, Andre Villegas
 '''
