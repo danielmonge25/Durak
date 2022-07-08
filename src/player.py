@@ -57,6 +57,9 @@ class player:
 
         return self.hand
 
+    def set_hand(self, hand):
+        self.hand = hand.copy()
+
     def get_len_hand(self):
         return len(self.hand)
     

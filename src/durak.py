@@ -5,6 +5,7 @@ Creado el 26 de Junio del 2022
 '''
 
 import csv
+import os.path
 from game import Game
 
 """from visual import Visual
@@ -55,7 +56,7 @@ class durak(Game):
       self.visual.set_reglas(self.reglas)
 
       # Elige quien va de primero
-      self.visual.pick_turn()
+      self.visual.hide_board()
 
       # Muestra el juego
       self.visual.show_game()
@@ -117,11 +118,16 @@ class durak(Game):
       return self.suit
 
    def get_special_card(self):
+
       return self.especial_card
    
    def save_game(self):
        with open('game.csv', 'w') as file:
          write = csv.writer(file)
+         if (self.visual.get_player() == 1):
+            write.writerow('1')
+         else:
+            write.writerow('2')
          write.writerow(self.cards.get_deck())
          write.writerow(self.player_one.get_hand())
          write.writerow(self.player_two.get_hand())
@@ -129,7 +135,52 @@ class durak(Game):
          special_card_list = []
          special_card_list.append(self.especial_card)
          write.writerow( special_card_list)
+   def set_deck(self, deck):
+      self.deck = deck
 
+   def set_special_card(self, special_card):
+      self.especial_card = special_card
+
+   def load_game(self):
+      if (os.path.exists('game.csv')):
+         with open('game.csv', 'r') as file:
+            counter = 0
+            for line in file:
+              if(counter == 0):
+                player = line[0]
+                file.readline()
+
+              elif(counter == 1):
+                line = line.rstrip()
+                deck = line.split(',')
+                file.readline()
+
+              elif(counter == 2):
+                line = line.rstrip()
+                if (player == '1'):
+                  player_one_hand = line.split(',')
+                else:
+                  player_two_hand = line.split(',')
+                file.readline()
+
+              elif(counter == 3):
+                line = line.rstrip()
+                if (player == '1'):
+                  player_two_hand = line.split(',')
+                else:
+                  player_one_hand = line.split(',')
+
+              elif(counter == 4):
+                special_card = file.readline()
+                special_card = special_card.rstrip()
+
+              counter += 1
+
+            self.set_deck(deck)
+            self.player_one.set_hand(player_one_hand)
+            self.player_two.set_hand(player_two_hand)
+            self.set_special_card(special_card)
+            return player
 
    def select_especial_card(self):
       """
