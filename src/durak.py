@@ -21,8 +21,6 @@ class durak(Game):
       self.player_two = player_two
       self.visual = visual
 
-      
-
    def play(self):
       """
          Comienza el juego
@@ -60,6 +58,9 @@ class durak(Game):
       # Muestra el juego
       self.visual.show_game()
 
+   def get_special_card(self):
+      return self.especial_card
+   
    def save_game(self):
        with open('game.csv', 'w') as file:
          write = csv.writer(file)
