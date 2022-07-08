@@ -28,7 +28,7 @@ class Visual:
         root.configure(background="green")
 
         frame = Frame(root, bg="green")
-        frame.pack(pady=20)
+        frame.pack(pady=10)
 
         #self.reglas = reglas
 
@@ -37,15 +37,6 @@ class Visual:
         self.count_player_one = 0
         self.count_player_two = 0
 
-        # Seleccion
-
-        self.seleccion_frame = LabelFrame(frame, text="", bd=0, bg='green')
-        self.seleccion_frame.pack(padx=10, ipadx=20)
-
-        self.seleccion_label = Label(self.seleccion_frame, text='Seleccione su turno', font=("Arial", 20), bg='green')
-        self.seleccion_label.grid(row=0, column=0, pady=20, padx = 20)
-
-        
         # Crea imagen para las cartas de los jugadores
         self.player_one_frame = LabelFrame(frame, text="Jugador 1", bd=0)
         self.player_one_frame.pack(padx=10, ipadx=10)
@@ -58,55 +49,55 @@ class Visual:
         self.especial_card_frame.pack(ipadx=10, pady=10)
 
         self.especial_card_label = Label(self.especial_card_frame, text='')
-        self.especial_card_label.grid(row=2, column=5, pady=20, padx = 20) 
+        self.especial_card_label.grid(row=2, column=5, pady=10, padx = 20) 
         
         # Coloca las cartas en la imagen
 
         # Para el jugador 1
         self.player_one_label_1 = Label(self.player_one_frame, text='')
-        self.player_one_label_1.grid(row=0, column=0, pady=20, padx = 20)
+        self.player_one_label_1.grid(row=0, column=0, pady=10, padx = 20)
 
         self.player_one_label_2 = Label(self.player_one_frame, text='')
-        self.player_one_label_2.grid(row=0, column=1, pady=20, padx = 20)
+        self.player_one_label_2.grid(row=0, column=1, pady=10, padx = 20)
 
         self.player_one_label_3 = Label(self.player_one_frame, text='')
-        self.player_one_label_3.grid(row=0, column=2, pady=20, padx = 20)
+        self.player_one_label_3.grid(row=0, column=2, pady=10, padx = 20)
 
         self.player_one_label_4 = Label(self.player_one_frame, text='')
-        self.player_one_label_4.grid(row=0, column=3, pady=20, padx = 20)
+        self.player_one_label_4.grid(row=0, column=3, pady=10, padx = 20)
 
         self.player_one_label_5 = Label(self.player_one_frame, text='')
-        self.player_one_label_5.grid(row=0, column=4, pady=20, padx = 20)
+        self.player_one_label_5.grid(row=0, column=4, pady=10, padx = 20)
 
         self.player_one_label_6 = Label(self.player_one_frame, text='')
-        self.player_one_label_6.grid(row=0, column=5, pady=20, padx = 20)
+        self.player_one_label_6.grid(row=0, column=5, pady=10, padx = 20)
 
         # Para el jugador 2 
         self.player_two_label_1 = Label(self.player_two_frame, text='')
-        self.player_two_label_1.grid(row=1, column=0, pady=20, padx=20)
+        self.player_two_label_1.grid(row=1, column=0, pady=10, padx=20)
 
         self.player_two_label_2 = Label(self.player_two_frame, text='')
-        self.player_two_label_2.grid(row=1, column=1, pady=20, padx=20)
+        self.player_two_label_2.grid(row=1, column=1, pady=10, padx=20)
 
         self.player_two_label_3 = Label(self.player_two_frame, text='')
-        self.player_two_label_3.grid(row=1, column=2, pady=20, padx=20)
+        self.player_two_label_3.grid(row=1, column=2, pady=10, padx=20)
 
         self.player_two_label_4 = Label(self.player_two_frame, text='')
-        self.player_two_label_4.grid(row=1, column=3, pady=20, padx=20)
+        self.player_two_label_4.grid(row=1, column=3, pady=10, padx=20)
 
         self.player_two_label_5 = Label(self.player_two_frame, text='')
-        self.player_two_label_5.grid(row=1, column=4, pady=20, padx=20)
+        self.player_two_label_5.grid(row=1, column=4, pady=10, padx=20)
 
         self.player_two_label_6 = Label(self.player_two_frame, text='')
-        self.player_two_label_6.grid(row=1, column=5, pady=20, padx=20)
+        self.player_two_label_6.grid(row=1, column=5, pady=10, padx=20)
 
 
         # Creacion del frame de los botones de las cartas
         self.button_frame = Frame(root, bg="green")
-        self.button_frame.pack(pady=20)
+        self.button_frame.pack(pady=0)
 
         self.button_two_frame = Frame(root, bg="green")
-        self.button_two_frame.pack(pady=20)
+        self.button_two_frame.pack(pady=10)
 
         # Creacion de botones
 
@@ -148,6 +139,24 @@ class Visual:
         self.card6_two = Button(self.button_two_frame, text="Sexta carta", command=lambda: self.buttons_card(player_one, player_two, 5))
         self.card6_two.grid(row=0, column=5, padx=20)
 
+        # Creacion del frame de los botones de quien va primero
+        self.button_options_frame = Frame(root, bg="green")
+        self.button_options_frame.pack(pady=5)
+
+         # Creacion del boton de guardado
+        self.save_button = Button(self.button_frame, text="Guardar juego", command=self.click_save_button)
+        self.save_button.grid(row=2, column=3, padx=20, pady=20)
+
+        # Boton de las reglas
+        self.helpButton= Button(self.button_options_frame, text="Mostrar Reglas", command=self.help)
+        self.helpButton.grid(row=1, column=0, padx=20)
+
+         # Crea frame de menu
+        self.seleccion_frame = LabelFrame(frame, text="", bd=0, bg='green')
+        self.seleccion_frame.pack(padx=10, ipadx=20)
+        self.seleccion_label = Label(self.seleccion_frame, text='Seleccione su turno', font=("Arial", 20), bg='green')
+        self.seleccion_label.grid(row=0, column=0, pady=10, padx = 20)
+
         # Creacion de los botones para saber quien va primero
         f = font.Font(size=15)
         self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
@@ -157,17 +166,11 @@ class Visual:
         self.myButtonFirst.pack(pady = 5)
         self.myButtonSecond.pack(pady = 5)
 
-        # Creacion del frame de los botones de quien va primero
-        self.button_options_frame = Frame(root, bg="green")
-        self.button_options_frame.pack(pady=20)
+        # Boton para cargar juego
+        self.load_button = Button(self.seleccion_frame, text="Cargar juego", command=self.click_load_button)
+        self.load_button.grid(row=2, column=0, padx=20, pady=10)
 
-        # Boton de las reglas
-        myButton = Button(self.button_options_frame, text="Mostrar Reglas", command=self.click)
-        myButton.grid(row=1, column=0, padx=20)
-
-        self.save_button = Button(self.button_options_frame, text="Guardar juego", command=self.click_save_button)
-        self.save_button.grid(row=1, column=1, padx=20)
-
+        # Boton para rendirse
         self.surrender_button = Button(self.button_options_frame, text="Rendirse", command=self.surrender)
         self.surrender_button.grid(row=1, column=2, padx=20)
 
@@ -178,20 +181,20 @@ class Visual:
          
     def show_labels_buttons(self):
         # Para el jugador 1
-        self.player_one_label_1.grid(row=0, column=0, pady=20, padx = 20)
-        self.player_one_label_2.grid(row=0, column=1, pady=20, padx = 20)
-        self.player_one_label_3.grid(row=0, column=2, pady=20, padx = 20)
-        self.player_one_label_4.grid(row=0, column=3, pady=20, padx = 20)
-        self.player_one_label_5.grid(row=0, column=4, pady=20, padx = 20)
-        self.player_one_label_6.grid(row=0, column=5, pady=20, padx = 20)
+        self.player_one_label_1.grid(row=0, column=0, pady=10, padx = 20)
+        self.player_one_label_2.grid(row=0, column=1, pady=10, padx = 20)
+        self.player_one_label_3.grid(row=0, column=2, pady=10, padx = 20)
+        self.player_one_label_4.grid(row=0, column=3, pady=10, padx = 20)
+        self.player_one_label_5.grid(row=0, column=4, pady=10, padx = 20)
+        self.player_one_label_6.grid(row=0, column=5, pady=10, padx = 20)
 
         # Para el jugador 2 
-        self.player_two_label_1.grid(row=1, column=0, pady=20, padx=20)
-        self.player_two_label_2.grid(row=1, column=1, pady=20, padx=20)
-        self.player_two_label_3.grid(row=1, column=2, pady=20, padx=20)
-        self.player_two_label_4.grid(row=1, column=3, pady=20, padx=20)
-        self.player_two_label_5.grid(row=1, column=4, pady=20, padx=20)
-        self.player_two_label_6.grid(row=1, column=5, pady=20, padx=20)
+        self.player_two_label_1.grid(row=1, column=0, pady=10, padx=20)
+        self.player_two_label_2.grid(row=1, column=1, pady=10, padx=20)
+        self.player_two_label_3.grid(row=1, column=2, pady=10, padx=20)
+        self.player_two_label_4.grid(row=1, column=3, pady=10, padx=20)
+        self.player_two_label_5.grid(row=1, column=4, pady=10, padx=20)
+        self.player_two_label_6.grid(row=1, column=5, pady=10, padx=20)
 
         self.card1.grid(row=0, column=0)
         
@@ -227,7 +230,7 @@ class Visual:
         self.surrender_button.grid_forget()
 
 
-        self.button_frame.pack(pady=20)
+        self.button_frame.pack(pady=10)
         self.player_one_frame.pack(ipadx=10, pady=10)
 
         self.player = 1
@@ -240,6 +243,20 @@ class Visual:
     def click_save_button(self):
        self.game.save_game()
        root.destroy()
+
+    def set_player(self, player):
+        self.player = player
+
+    def click_load_button(self):
+        player = self.game.load_game()
+        self.set_player(player)
+        messagebox.showinfo("Cargar juego", "Cargando juego...")
+
+        self.config_image(self.game.player_one.get_hand(), self.game.player_two.get_hand(), self.game.get_special_card())
+        if (player == "1"):
+          self.first_turn()
+        else:
+          self.second_turn()
      
     def set_game(self, durak_game):
         self.game = durak_game 
@@ -256,7 +273,7 @@ class Visual:
             self.player_one_frame.pack_forget()
             self.button_frame.pack_forget()
 
-            self.button_two_frame.pack(pady=20)
+            self.button_two_frame.pack(pady=10)
             self.player_two_frame.pack(ipadx=10, pady=10) 
             self.surrender_button.grid(row=1, column=2, padx=20)
 
@@ -308,7 +325,7 @@ class Visual:
                     self.surrender_button.grid_forget()
 
 
-                    self.button_frame.pack(pady=20)
+                    self.button_frame.pack(pady=10)
                     self.player_one_frame.pack(ipadx=10, pady=10)
 
                     print("Despues 2", player_two.get_hand())
@@ -366,7 +383,7 @@ class Visual:
 
         root.mainloop()
 
-    def pick_turn(self):
+    def hide_board(self):
         """
             Oculta todo lo que no sea relacionado a las opciones para elegir quien va primero
 
@@ -381,9 +398,7 @@ class Visual:
         self.save_button.grid_forget()
         self.surrender_button.grid_forget()
 
-        return self.player
-
-    def click(self):
+    def help(self):
         """
             Muestra las reglas del juego
 
@@ -393,10 +408,10 @@ class Visual:
         messagebox.showinfo("Reglas", self.reglas)
 
     def show_save_button(self):
-        self.save_button.grid(row=1, column=1, padx=20)
+        self.save_button.grid(row=1, column=6, pady=10)
     
     def show_buttons_cards(self):
-        self.button_frame.pack(pady=20)
+        self.button_frame.pack(pady=10)
 
     def first_turn(self):
         """
@@ -564,3 +579,6 @@ class Visual:
         self.player_two_label_5.config(image='')
 
         self.player_two_label_6.config(image='') 
+
+    def get_player(self):
+        return self.player
