@@ -37,6 +37,8 @@ class Visual:
         self.count_player_one = 0
         self.count_player_two = 0
 
+        self.config = False
+
         # Seleccion
 
         self.seleccion_frame = LabelFrame(frame, text="", bd=0, bg='green')
@@ -53,12 +55,24 @@ class Visual:
         self.player_two_frame = LabelFrame(frame, text="Jugador 2", bd=0)
         self.player_two_frame.pack(ipadx=10, pady=10)
 
+
+        # Crea frame para la carta especial y carta del adversario
+        frame_cards = Frame(root, bg="green")
+        frame_cards.pack(pady=20)
+
         # Crea imagen para la carta especial y coloca cartas en la imagen
-        self.especial_card_frame = LabelFrame(frame, text = "Carta especial", bd=0)  
-        self.especial_card_frame.pack(ipadx=10, pady=10)
+        self.especial_card_frame = LabelFrame(frame_cards, text = "Carta especial", bd=0)  
+        self.especial_card_frame.grid(row=1, column=0, padx=20, ipadx=20) 
 
         self.especial_card_label = Label(self.especial_card_frame, text='')
-        self.especial_card_label.grid(row=2, column=5, pady=20, padx = 20) 
+        self.especial_card_label.pack(pady=20)
+
+        # Crea imagen para la carta que jugo el adversario
+        self.played_card_frame = LabelFrame(frame_cards, text="Carta del adversario", bd = 0)
+        self.played_card_frame.grid(row=1, column=1, ipadx=20) 
+
+        self.played_card_label = Label(self.played_card_frame, text='')
+        self.played_card_label.pack(pady=20)
         
         # Coloca las cartas en la imagen
 
@@ -152,7 +166,7 @@ class Visual:
         f = font.Font(size=15)
         self.myButtonFirst = Button(root, text="Primero", command=self.first_turn, width=25)
         self.myButtonFirst['font'] = f
-        self.myButtonSecond = Button(root, text="Segundo", command=self.second_turn, width=25)
+        self.myButtonSecond = Button(root, text="Segundo", command=self.first_turn, width=25) #second_turn
         self.myButtonSecond['font'] = f
         self.myButtonFirst.pack(pady = 5)
         self.myButtonSecond.pack(pady = 5)
@@ -177,7 +191,7 @@ class Visual:
          messagebox.showinfo("Victoria", "El jugador 2 gano la partida")
          root.destroy()
 
-    def player_one_winner(self):
+    def player_two_winner(self):
          messagebox.showinfo("Victoria", "El jugador 1 gano la partida")
          root.destroy()
 
@@ -257,6 +271,7 @@ class Visual:
             # Saca la carta de la mano
             player_one.remove_card(index)
 
+            self.config_image_played_card(player_one.get_playing_card())
             # Quita y agrega botones
             self.player_one_frame.pack_forget()
             self.button_frame.pack_forget()
@@ -306,8 +321,12 @@ class Visual:
                 player_two.set_value_hand(index)
                 if(self.game.verify_number() == True):
                     print("Antes 2", player_two.get_hand())
+
                     player_two.remove_card(index)
-                
+
+                    self.config_image_played_card(player_two.get_playing_card())
+
+
                     self.player_two_frame.pack_forget()
                     self.button_two_frame.pack_forget()
                     self.surrender_button.grid_forget()
@@ -379,7 +398,10 @@ class Visual:
         """
         self.player_one_frame.pack_forget()
         self.player_two_frame.pack_forget()
-        self.especial_card_frame.pack_forget()
+        
+        self.especial_card_frame.grid_forget()
+        self.played_card_frame.grid_forget()
+
         self.button_frame.pack_forget()
         self.button_two_frame.pack_forget()
 
@@ -412,14 +434,17 @@ class Visual:
 
         messagebox.showinfo("Turno", "Tu turno es de Primero!")
         self.player_one_frame.pack(padx=10, ipadx=10)
-        self.especial_card_frame.pack(ipadx=10, pady=10)
+
+        self.especial_card_frame.grid(row=1, column=0, padx=20, ipadx=20) 
+
+        self.played_card_frame.grid(row=1, column=1, ipadx=20)
+
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
 
         # Muestra los botones de las cartas
         self.show_buttons_cards()
-
         # Muestra el boton de guardar partida
         self.show_save_button()
 
@@ -434,7 +459,9 @@ class Visual:
 
         messagebox.showinfo("Turno", "Tu turno es de Segundo!")
         self.player_two_frame.pack(ipadx=10, pady=10)  
-        self.especial_card_frame.pack(ipadx=10, pady=10)
+
+        self.especial_card_frame.grid(row=1, column=0, padx=20, ipadx=20) 
+
         self.myButtonFirst.pack_forget()
         self.myButtonSecond.pack_forget()
         self.seleccion_frame.pack_forget()
@@ -462,6 +489,14 @@ class Visual:
         card_image_final_player = ImageTk.PhotoImage(card_resize_image_player)
 
         return card_image_final_player
+
+    def config_image_played_card(self, card):
+        global played_card_image_final
+
+        played_card_image = Image.open(f'../cards/{card}.png')
+        played_card_resize_image = played_card_image.resize((150, 218))
+        played_card_image_final = ImageTk.PhotoImage(played_card_resize_image)
+        self.played_card_label.config(image=played_card_image_final)
 
     def config_image(self, deck_player_one, deck_player_two, card):
         """
