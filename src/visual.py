@@ -168,7 +168,30 @@ class Visual:
         self.save_button = Button(self.button_options_frame, text="Guardar juego", command=self.click_save_button)
         self.save_button.grid(row=1, column=1, padx=20)
 
+        self.surrender_button = Button(self.button_options_frame, text="Rendirse", command=self.surrender)
+        self.surrender_button.grid(row=1, column=2, padx=20)
+
         self.card = 0
+    
+    def show_labels(self):
+        # Para el jugador 1
+        self.player_one_label_1.grid(row=0, column=0, pady=20, padx = 20)
+        self.player_one_label_2.grid(row=0, column=1, pady=20, padx = 20)
+        self.player_one_label_3.grid(row=0, column=2, pady=20, padx = 20)
+        self.player_one_label_4.grid(row=0, column=3, pady=20, padx = 20)
+        self.player_one_label_5.grid(row=0, column=4, pady=20, padx = 20)
+        self.player_one_label_6.grid(row=0, column=5, pady=20, padx = 20)
+
+        # Para el jugador 2 
+        self.player_two_label_1.grid(row=1, column=0, pady=20, padx=20)
+        self.player_two_label_2.grid(row=1, column=1, pady=20, padx=20)
+        self.player_two_label_3.grid(row=1, column=2, pady=20, padx=20)
+        self.player_two_label_4.grid(row=1, column=3, pady=20, padx=20)
+        self.player_two_label_5.grid(row=1, column=4, pady=20, padx=20)
+        self.player_two_label_6.grid(row=1, column=5, pady=20, padx=20)
+
+    def surrender(self):
+        self.game.next_round()
 
     def click_save_button(self):
        self.game.save_game()
@@ -191,6 +214,7 @@ class Visual:
 
             self.button_two_frame.pack(pady=20)
             self.player_two_frame.pack(ipadx=10, pady=10) 
+            self.surrender_button.grid(row=1, column=2, padx=20)
 
             print("Despues 1", player_one.get_hand())
 
@@ -228,7 +252,7 @@ class Visual:
                 self.card1.grid_forget()
                 self.count_player_one = self.count_player_one + 1
         else: # Defensor
-
+            
             if (self.game.verify_suit(index) == True): 
                 player_two.set_value_hand(index)
                 if(self.game.verify_number() == True):
@@ -237,6 +261,8 @@ class Visual:
                 
                     self.player_two_frame.pack_forget()
                     self.button_two_frame.pack_forget()
+                    self.surrender_button.grid_forget()
+
 
                     self.button_frame.pack(pady=20)
                     self.player_one_frame.pack(ipadx=10, pady=10)
@@ -309,6 +335,7 @@ class Visual:
         self.button_two_frame.pack_forget()
 
         self.save_button.grid_forget()
+        self.surrender_button.grid_forget()
 
         return self.player
 

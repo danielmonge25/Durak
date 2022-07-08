@@ -36,6 +36,9 @@ class player:
         """
 
         self.hand.append(card)
+
+    def clean_hand(self):
+        self.hand = []
     
     def get_playing_card(self):
         return self.playing_card
