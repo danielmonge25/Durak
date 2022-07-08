@@ -1,4 +1,4 @@
-'''
+﻿'''
 Creado el 26 de Junio del 2022 
 
 @autores: Fernando Aguero, Daniel MOnge, Alejandro Sanchez, Andre Villegas
@@ -276,14 +276,16 @@ class Visual:
 
     def click_load_button(self):
         player = self.game.load_game()
-        self.set_player(player)
-        messagebox.showinfo("Cargar juego", "Cargando juego...")
-
-        self.config_image(self.game.player_one.get_hand(), self.game.player_two.get_hand(), self.game.get_special_card())
-        if (player == "1"):
-          self.first_turn()
+        if(player != 0):
+          self.set_player(player)
+          messagebox.showinfo("Cargar juego", "Cargando juego...")
+          self.config_image(self.game.player_one.get_hand(), self.game.player_two.get_hand(), self.game.get_special_card())
+          if (player == "1"):
+            self.first_turn()
+          else:
+            self.second_turn()
         else:
-          self.second_turn()
+          messagebox.showinfo("Error", "No existe archivo de partida guardada")
      
     def set_game(self, durak_game):
         self.game = durak_game 

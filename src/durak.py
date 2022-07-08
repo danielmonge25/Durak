@@ -1,4 +1,4 @@
-'''
+﻿'''
 Creado el 26 de Junio del 2022
 
 @autores: Fernando Aguero, Daniel Monge, Alejandro Sanchez, Andre Villegas
@@ -146,40 +146,40 @@ class durak(Game):
          with open('game.csv', 'r') as file:
             counter = 0
             for line in file:
-              if(counter == 0):
-                player = line[0]
+               if(line != "\n"):
+                  if(counter == 0):
+                     player = line[0]
 
-              elif(counter == 1):
-                line = line.rstrip()
-                deck = line.split(',')
+                  elif(counter == 1):
+                     line = line.rstrip()
+                     deck = line.split(',')
 
-              elif(counter == 2):
-                line = line.rstrip()
-                if (player == '1'):
-                  player_one_hand = line.split(',')
-                else:
-                  player_two_hand = line.split(',')
+                  elif(counter == 2):
+                     line = line.rstrip()
+                     if (player == '1'):
+                        player_one_hand = line.split(',')
+                     else:
+                        player_two_hand = line.split(',')
 
-              elif(counter == 3):
-                line = line.rstrip()
-                if (player == '1'):
-                  player_two_hand = line.split(',')
-                else:
-                  player_one_hand = line.split(',')
+                  elif(counter == 3):
+                     line = line.rstrip()
+                     if (player == '1'):
+                        player_two_hand = line.split(',')
+                     else:
+                        player_one_hand = line.split(',')
 
-              elif(counter == 4):
-               # special_card = file.readline()
-               special_card = line.rstrip()
+                  elif(counter == 4):
+                     special_card = line.rstrip()
 
-              counter += 1
-            print(special_card)
-            print(player_one_hand)
-            print(player_two_hand)
+                  counter += 1
+                  
             self.set_deck(deck)
             self.player_one.set_hand(player_one_hand)
             self.player_two.set_hand(player_two_hand)
             self.set_special_card(special_card)
             return player
+      else:
+         return 0
 
    def select_especial_card(self):
       """
