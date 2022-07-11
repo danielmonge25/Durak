@@ -667,7 +667,7 @@ class Visual:
 
         self.player = player
     
-    def set_reglas(self,reglas):
+    def set_reglas(self, reglas):
         """
             Establece las reglas del juego
 
