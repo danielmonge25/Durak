@@ -74,9 +74,9 @@ class durak(Game):
          self.player_one.clean_hand()
          self.player_two.clean_hand()
          self.draw()
-         print("deck", self.cards.get_deck())
-         print("h1", self.player_one.get_hand())
-         print("h2", self.player_two.get_hand())
+         #print("deck", self.cards.get_deck())
+         #print("h1", self.player_one.get_hand())
+         #print("h2", self.player_two.get_hand())
          self.visual.config_image(self.player_one.get_hand(), self.player_two.get_hand(), self.especial_card)
          self.visual.show_labels_buttons()
       
@@ -88,8 +88,8 @@ class durak(Game):
       self.player_two.set_value(0)
 
    def verify_number(self):
-      print("o", self.player_one.get_value())
-      print("t", self.player_two.get_value())
+      #print("o", self.player_one.get_value())
+      #print("t", self.player_two.get_value())
       if (self.player_one.get_value() <= self.player_two.get_value()):
          return True
       else:
@@ -98,9 +98,9 @@ class durak(Game):
    def verify_suit(self, index):
       # Verifica si son del mismo tipo 
       suit_player_two = self.get_suit(self.player_two.get_hand()[index])
-      print("c", self.especial_card)
-      print("a", suit_player_two)
-      print("b", self.player_one.get_playing_card())
+      #print("c", self.especial_card)
+      #print("a", suit_player_two)
+      #print("b", self.player_one.get_playing_card())
       if suit_player_two in self.player_one.get_playing_card() or suit_player_two in self.especial_card:
          return True
       else:
