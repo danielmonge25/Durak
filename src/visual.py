@@ -1,7 +1,7 @@
 ﻿'''
 Creado el 26 de Junio del 2022 
 
-@autores: Fernando Aguero, Daniel MOnge, Alejandro Sanchez, Andre Villegas
+@autores: Fernando Aguero, Daniel Monge, Alejandro Sanchez, Andre Villegas
 '''
 
 from ast import Index
@@ -15,12 +15,13 @@ class Visual:
         """
             Constructor de la clase visual
 
-            El parametro reglas debe ser string
-            El parametro deck debe ser un arreglo de strings (Mazo del juego)
+            El parametro player_one debe ser objeto de la clase player
+            El parametro player_two debe ser objeto de la clase player
 
             Esta funcion no retorna nada
         """
         
+        # Interfaz principal del juego
         global root
         root = Tk()
         root.title(f'Durak game') # - {len(deck)} Cartas faltantes
@@ -36,16 +37,14 @@ class Visual:
         frame.pack(pady=10)
 
         #self.reglas = reglas
-
         self.player = 0
-
         self.count_player_one = 0
         self.count_player_two = 0
-
         self.config = False
+        self.card = 0
 
-        # Seleccion
 
+        # Crea el frame y labels para la seleccion de jugador
         self.seleccion_frame = LabelFrame(frame, text="", bd=0, bg='green')
         self.seleccion_frame.pack(padx=10, ipadx=20)
 
@@ -81,8 +80,8 @@ class Visual:
         self.myButtonSecond['font'] = f
         self.myButtonFirst.pack(pady = 5)
         self.myButtonSecond.pack(pady = 5)
-        # Coloca las cartas en la imagen
 
+        # Coloca las cartas en la imagen
         # Para el jugador 1
         self.player_one_label_1 = Label(self.player_one_frame, text='')
         self.player_one_label_1.grid(row=1, column=0, pady=10, padx = 20)
@@ -121,7 +120,6 @@ class Visual:
         self.player_two_label_6 = Label(self.player_two_frame, text='')
         self.player_two_label_6.grid(row=1, column=5, pady=10, padx=20)
 
-
         # Creacion del frame de los botones de las cartas
         self.button_frame = Frame(root, bg="green")
         self.button_frame.pack(pady=5, padx=200)
@@ -130,7 +128,6 @@ class Visual:
         self.button_two_frame.pack(pady=10)
 
         # Creacion de botones
-
         # Botones para el jugador 1
         self.card1 = Button(self.button_frame, text="Primera carta", command=lambda: self.buttons_card(player_one, player_two, 0))
         self.card1.grid(row=0, column=2, padx=37)
@@ -189,59 +186,51 @@ class Visual:
         self.surrender_button = Button(self.button_options_frame, text="Rendirse", command=self.surrender)
         self.surrender_button.grid(row=3, column=0, padx=20)
 
-        self.card = 0
+    def help(self):
+        """
+            Muestra las reglas del juego
+
+            Esta funcion no retorna nada
+        """
+
+        messagebox.showinfo("Reglas", self.reglas)
     
-    def player_one_winner(self):
-         messagebox.showinfo("Victoria", "El jugador 2 gano la partida")
-         root.destroy()
+    def click_save_button(self):
+        """
+            LLama al metodo de guardar partida de la clase durak
 
-    def player_two_winner(self):
-         messagebox.showinfo("Victoria", "El jugador 1 gano la partida")
-         root.destroy()
+            Esta funcion no retorna nada
+        """
 
-    def show_labels_buttons(self):
-        # Para el jugador 1
-        self.player_one_label_1.grid(row=0, column=0, pady=10, padx = 20)
-        self.player_one_label_2.grid(row=0, column=1, pady=10, padx = 20)
-        self.player_one_label_3.grid(row=0, column=2, pady=10, padx = 20)
-        self.player_one_label_4.grid(row=0, column=3, pady=10, padx = 20)
-        self.player_one_label_5.grid(row=0, column=4, pady=10, padx = 20)
-        self.player_one_label_6.grid(row=0, column=5, pady=10, padx = 20)
+        self.game.save_game()
+        root.destroy()
 
-        # Para el jugador 2 
-        self.player_two_label_1.grid(row=1, column=0, pady=10, padx=20)
-        self.player_two_label_2.grid(row=1, column=1, pady=10, padx=20)
-        self.player_two_label_3.grid(row=1, column=2, pady=10, padx=20)
-        self.player_two_label_4.grid(row=1, column=3, pady=10, padx=20)
-        self.player_two_label_5.grid(row=1, column=4, pady=10, padx=20)
-        self.player_two_label_6.grid(row=1, column=5, pady=10, padx=20)
+    def click_load_button(self):
+        """
+            Establece la interfaz de la partida que se cargo
 
-        self.card1.grid(row=0, column=2, padx=37)
-        
-        self.card2.grid(row=0, column=4, padx=37)
+            Esta funcion no retorna nada
+        """
 
-        self.card3.grid(row=0, column=6, padx=37)
-
-        self.card4.grid(row=0, column=8, padx=37)
-
-        self.card5.grid(row=0, column=10, padx=37)
-
-        self.card6.grid(row=0, column=12, padx=37)
-
-        # Botones para el jugador 2
-        self.card1_two.grid(row=0, column=2, padx=37)
-        
-        self.card2_two.grid(row=0, column=4, padx=37)
-
-        self.card3_two.grid(row=0, column=6, padx=37)
-
-        self.card4_two.grid(row=0, column=8, padx=37)
-
-        self.card5_two.grid(row=0, column=10, padx=37)
-
-        self.card6_two.grid(row=0, column=12, padx=37)
+        player = self.game.load_game()
+        if(player != 0):
+          self.set_player(player)
+          messagebox.showinfo("Cargar juego", "Cargando juego...")
+          self.config_image(self.game.player_one.get_hand(), self.game.player_two.get_hand(), self.game.get_special_card())
+          if (player == "1"):
+            self.first_turn()
+          else:
+            self.second_turn()
+        else:
+          messagebox.showinfo("Error", "No existe archivo de partida guardada")
 
     def surrender(self):
+        """
+            Establece la interfaz para la siguiente ronda
+
+            Esta funcion no retorna nada
+        """
+
         self.game.next_round()
         
         # Quita y agrega botones
@@ -261,32 +250,17 @@ class Visual:
         self.count_player_one = 0
 
         #print("deck", self.game.cards.get_deck())
-
-
-    def click_save_button(self):
-       self.game.save_game()
-       root.destroy()
-
-    def set_player(self, player):
-        self.player = player
-
-    def click_load_button(self):
-        player = self.game.load_game()
-        if(player != 0):
-          self.set_player(player)
-          messagebox.showinfo("Cargar juego", "Cargando juego...")
-          self.config_image(self.game.player_one.get_hand(), self.game.player_two.get_hand(), self.game.get_special_card())
-          if (player == "1"):
-            self.first_turn()
-          else:
-            self.second_turn()
-        else:
-          messagebox.showinfo("Error", "No existe archivo de partida guardada")
-     
-    def set_game(self, durak_game):
-        self.game = durak_game 
-
+    
     def buttons_card(self, player_one, player_two, index):
+        """
+            Establece la interfaz de despues de la jugada de uno de los dos jugadores
+
+            El parametro player_one debe ser objeto de la clase player
+            El parametro player_one debe ser objeto de la clase player
+            El parametro index debe ser int (Posicion del arreglo donde se encuentra la carta a jugar)
+            Esta funcion no retorna nada
+        """
+
         if self.player == 1: # Atacante
             #print("Antes 1", player_one.get_hand())
 
@@ -409,9 +383,26 @@ class Visual:
             else: 
                 messagebox.showinfo("Restriccion", "Se debe jugar el mismo palo")
 
-    def show_winner(self):
-        messagebox.showinfo("Ganador", "El jugador 2 gano esta ronda")
+    def player_one_winner(self):
+        """
+            Muestra un mensaje diciendo que gano el jugador atacante
 
+            Esta funcion no retorna nada
+        """
+
+        messagebox.showinfo("Victoria", "El jugador 2 gano la partida")
+        root.destroy()
+
+    def player_two_winner(self):
+        """
+            Muestra un mensaje diciendo que gano el jugador defensor
+
+            Esta funcion no retorna nada
+        """
+
+        messagebox.showinfo("Victoria", "El jugador 1 gano la partida")
+        root.destroy()
+    
     def show_game(self):
         """
             Muestra la interfaz principal del juego
@@ -421,12 +412,80 @@ class Visual:
 
         root.mainloop()
 
+    def show_winner(self):
+        """
+            Muestra quien gano la partida
+
+            Esta funcion no retorna nada
+        """
+
+        messagebox.showinfo("Ganador", "El jugador 2 gano esta ronda")
+
+    def show_buttons_cards(self):
+        """
+            Muestra la interfaz de los botones de opciones
+
+            Esta funcion no retorna nada
+        """
+
+        self.button_frame.pack(pady=10)
+
+    def show_save_button(self):
+        """
+            Muestra la interfaz del boton de guardado
+
+            Esta funcion no retorna nada
+        """
+
+        self.button_options_frame.pack(pady=5, padx=100)
+        self.save_button.grid(row=4, column=4, padx=15, pady=20)
+    
+    def show_labels_buttons(self):
+        """
+            Establece los labels de las cartas y los botones
+
+            Esta funcion no retorna nada
+        """
+
+        # Para el jugador 1
+        self.player_one_label_1.grid(row=0, column=0, pady=10, padx = 20)
+        self.player_one_label_2.grid(row=0, column=1, pady=10, padx = 20)
+        self.player_one_label_3.grid(row=0, column=2, pady=10, padx = 20)
+        self.player_one_label_4.grid(row=0, column=3, pady=10, padx = 20)
+        self.player_one_label_5.grid(row=0, column=4, pady=10, padx = 20)
+        self.player_one_label_6.grid(row=0, column=5, pady=10, padx = 20)
+
+        # Para el jugador 2 
+        self.player_two_label_1.grid(row=1, column=0, pady=10, padx=20)
+        self.player_two_label_2.grid(row=1, column=1, pady=10, padx=20)
+        self.player_two_label_3.grid(row=1, column=2, pady=10, padx=20)
+        self.player_two_label_4.grid(row=1, column=3, pady=10, padx=20)
+        self.player_two_label_5.grid(row=1, column=4, pady=10, padx=20)
+        self.player_two_label_6.grid(row=1, column=5, pady=10, padx=20)
+
+        # Botones para el jugador 1
+        self.card1.grid(row=0, column=2, padx=37)
+        self.card2.grid(row=0, column=4, padx=37)
+        self.card3.grid(row=0, column=6, padx=37)
+        self.card4.grid(row=0, column=8, padx=37)
+        self.card5.grid(row=0, column=10, padx=37)
+        self.card6.grid(row=0, column=12, padx=37)
+
+        # Botones para el jugador 2
+        self.card1_two.grid(row=0, column=2, padx=37)
+        self.card2_two.grid(row=0, column=4, padx=37)
+        self.card3_two.grid(row=0, column=6, padx=37)
+        self.card4_two.grid(row=0, column=8, padx=37)
+        self.card5_two.grid(row=0, column=10, padx=37)
+        self.card6_two.grid(row=0, column=12, padx=37)
+
     def hide_board(self):
         """
             Oculta todo lo que no sea relacionado a las opciones para elegir quien va primero
 
             Esta funcion retorna el jugador que va primero
         """
+
         self.player_one_frame.pack_forget()
         self.player_two_frame.pack_forget()
         
@@ -438,23 +497,7 @@ class Visual:
 
         self.save_button.grid_forget()
         self.surrender_button.grid_forget()
-
-    def help(self):
-        """
-            Muestra las reglas del juego
-
-            Esta funcion no retorna nada
-        """
-
-        messagebox.showinfo("Reglas", self.reglas)
-
-    def show_save_button(self):
-        self.button_options_frame.pack(pady=5, padx=100)
-        self.save_button.grid(row=4, column=4, padx=15, pady=20)
     
-    def show_buttons_cards(self):
-        self.button_frame.pack(pady=10)
-
     def first_turn(self):
         """
             Muestra la mano del primer jugador
@@ -527,6 +570,16 @@ class Visual:
         return card_image_final_player
 
     def config_image_played_card(self, card):
+        """
+            Configura las imagenes de la carta que jugo el adversario
+
+            El parametro card debe ser un string (Carta del adversario)
+
+            El uso de variables globales es porque sino tkinter no funciona
+
+            Esta funcion no retorna nada
+        """
+
         global played_card_image_final
 
         played_card_image = Image.open(f'../cards/{card}.png')
@@ -541,6 +594,8 @@ class Visual:
             El parametro deck_player_one debe ser un arreglo de strings (Mano del jugador 1)
             El parametro deck_player_two debe ser un arreglo de strings (Mano del jugador 2)
             El parametro card debe ser un string (Carta especial)
+
+            El uso de variables globales es porque sino tkinter no funciona
 
             Esta funcion no retorna nada
         """
@@ -594,6 +649,24 @@ class Visual:
                 card_image_final_player_twelve = self.resize_cards(deck_player_two, index)
                 self.player_two_label_6.config(image=card_image_final_player_twelve) 
 
+    def get_player(self):
+        """
+            Esta funcion devuelve el el objeto de la clase player
+        """
+
+        return self.player
+
+    def set_player(self, player):
+        """
+            Establece el objeto de la clase player
+
+            El parametro player debe ser objeto de la clase player
+
+            Esta funcion no retorna nada
+        """
+
+        self.player = player
+    
     def set_reglas(self,reglas):
         """
             Establece las reglas del juego
@@ -604,42 +677,14 @@ class Visual:
         """
 
         self.reglas = reglas
-        #cad_button.config(state="disabled")
 
-    def clean_old_cards(self):
-        """ 
-            No utilizado aun
-            
-            Limpia la imagen de las cartas de ambos jugadores
+    def set_game(self, durak_game):
+        """
+            Establece el objeto de la clase durak
+
+            El parametro durak_game debe ser objeto de la clase durak
 
             Esta funcion no retorna nada
         """
-
-         # Para el jugador 1
-        self.player_one_label_1.config(image='')
-
-        self.player_one_label_2.config(image='')
-
-        self.player_one_label_3.config(image='')
-
-        self.player_one_label_4.config(image='')
-
-        self.player_one_label_5.config(image='')
-
-        self.player_one_label_6.config(image='')
-
-        # Para el jugador 2 
-        self.player_two_label_1.config(image='')
-
-        self.player_two_label_2.config(image='')
-
-        self.player_two_label_3.config(image='')
-
-        self.player_two_label_4.config(image='')
-
-        self.player_two_label_5.config(image='')
-
-        self.player_two_label_6.config(image='') 
-
-    def get_player(self):
-        return self.player
+        
+        self.game = durak_game 

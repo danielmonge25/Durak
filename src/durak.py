@@ -17,6 +17,11 @@ class durak(Game):
       """
             Constructor de la clase durak
 
+            El parametro cards debe ser objeto de la clase deck
+            El parametro player_one debe ser objeto de la clase player
+            El parametro player_two debe ser objeto de la clase player
+            El parametro visual debe ser objeto de la clase visual
+
             Esta funcion no retorna nada
       """
 
