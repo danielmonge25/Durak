@@ -15,6 +15,7 @@ def main():
 
         Esta funcion no retorna nada
     """
+
     cards = deck()
 
     # Creacion de los jugadores
