@@ -390,7 +390,7 @@ class Visual:
             Esta funcion no retorna nada
         """
 
-        messagebox.showinfo("Victoria", "El jugador 2 gano la partida")
+        messagebox.showinfo("Victoria", "El jugador 1 gano la partida")
         root.destroy()
 
     def player_two_winner(self):
