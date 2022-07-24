@@ -20,16 +20,6 @@ class Game(ABC):
     
   #esqueleto del juego
   @abstractmethod
-  def play(self) -> None:
-    """
-      Metodo abstracto que comienza el juego
-
-      Esta funcion no retorna nada
-    """
-
-    pass
-  
-  @abstractmethod
   def verify_turn(self) -> None:
     """
       Metodo abstracto que verifica si los jugadores tienen cartas
