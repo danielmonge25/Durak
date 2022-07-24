@@ -7,10 +7,7 @@ Creado el 26 de Junio del 2022
 import csv
 import os.path
 from game import Game
-
-"""from visual import Visual
-from deck import deck
-from player import player"""
+from JSON_serializer import JSON_Seializer
 
 class durak(Game):
    def __init__(self, cards, player_one, player_two, visual):
@@ -44,6 +41,9 @@ class durak(Game):
       self.player_two = player_two
       # Objeto de la clase visual
       self.visual = visual
+
+      # Objeto de la clase Json_serializer
+      self.Json_serializer = JSON_Seializer()
 
    def play(self):
       """
@@ -194,24 +194,12 @@ class durak(Game):
 
    def save_game(self):
       """
-         Guarda los datos de la partida en un archivo .csv
+         LLama al serializador para guardar la partida
 
          Esta funcion no retorna nada
       """
+      self.Json_serializer.serialize_game(self.visual, self.cards, self.player_one, self.player_two, self.especial_card)
       
-      with open('game.csv', 'w') as file:
-         write = csv.writer(file)
-         if (self.visual.get_player() == 1):
-            write.writerow('1')
-         else:
-            write.writerow('2')
-         write.writerow(self.cards.get_deck())
-         write.writerow(self.player_one.get_hand())
-         write.writerow(self.player_two.get_hand())
-
-         special_card_list = []
-         special_card_list.append(self.especial_card)
-         write.writerow( special_card_list)
 
    def load_game(self):
       """
