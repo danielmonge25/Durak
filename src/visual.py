@@ -248,8 +248,6 @@ class Visual:
         self.player = 1
         self.count_player_two = 0
         self.count_player_one = 0
-
-        #print("deck", self.game.cards.get_deck())
     
     def buttons_card(self, player_one, player_two, index):
         """

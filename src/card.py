@@ -7,7 +7,7 @@ Creado el 26 de Junio del 2022
 class Card:
     def __init__(self):
         """
-            Constructor de la clase card
+            Constructor de la clase Card
 
             Esta funcion no retorna nada
         """

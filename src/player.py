@@ -77,7 +77,21 @@ class player:
         """
 
         return len(self.hand)
-    
+
+    def get_hand_save(self):
+        """
+            Esta funcion devuelve la mano del jugador para ser guardada
+        """
+
+        new_hand = []
+
+        for index in range(len(self.hand)):
+            new_hand.append(self.hand[index].get_card_name())
+            print(new_hand[index])
+        print("\n")
+
+        return new_hand
+        
     def get_len_hand(self):
         """
             Esta funcion devuelve el tamanyo de la mano del jugador
@@ -97,9 +111,9 @@ class player:
             Esta funcion devuelve la mano del jugador
         """
 
-        for index in range(len(self.hand)):
+        """for index in range(len(self.hand)):
             print(self.hand[index].get_card_name())
-        print("\n")
+        print("\n")"""
 
         return self.hand
 

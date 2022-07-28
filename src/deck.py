@@ -65,4 +65,12 @@ class deck:
             Esta funcion devuelve el mazo del juego
         """
 
-        return self.deck
+        new_deck = []
+        
+        print("MAZO")
+        for index in range(len(self.deck)):
+            new_deck.append(self.deck[index].get_card_name())
+            print(new_deck[index])
+        print("\n")
+
+        return new_deck

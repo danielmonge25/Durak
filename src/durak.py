@@ -109,8 +109,6 @@ class durak(Game):
          self.player_two.clean_hand()
          self.draw()
          #print("deck", self.cards.get_deck())
-         #print("h1", self.player_one.get_hand())
-         #print("h2", self.player_two.get_hand())
          self.visual.config_image(self.player_one.get_hand(), self.player_two.get_hand(), self.especial_card)
          self.visual.show_labels_buttons()
       
