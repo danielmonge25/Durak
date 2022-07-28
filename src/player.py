@@ -97,6 +97,10 @@ class player:
             Esta funcion devuelve la mano del jugador
         """
 
+        for index in range(len(self.hand)):
+            print(self.hand[index].get_card_name())
+        print("\n")
+
         return self.hand
 
     def set_hand(self, hand):
@@ -125,4 +129,4 @@ class player:
             Esta funcion guarda el valor de la carta que el jugador va a jugar
         """
 
-        self.value = int(self.hand[index].split("_", 1)[0])
+        self.value = int(self.hand[index].get_card_name().split("_", 1)[0])

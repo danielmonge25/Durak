@@ -563,7 +563,7 @@ class Visual:
             Esta funcion retorna la imagen de la carta
         """
     
-        card_image_player = Image.open(f'../cards/{deck_player[index]}.png')
+        card_image_player = Image.open(f'../cards/{deck_player[index].get_card_name()}.png')
         card_resize_image_player = card_image_player.resize((150, 218))
         card_image_final_player = ImageTk.PhotoImage(card_resize_image_player)
 
@@ -582,7 +582,7 @@ class Visual:
 
         global played_card_image_final
 
-        played_card_image = Image.open(f'../cards/{card}.png')
+        played_card_image = Image.open(f'../cards/{card.get_card_name()}.png')
         played_card_resize_image = played_card_image.resize((150, 218))
         played_card_image_final = ImageTk.PhotoImage(played_card_resize_image)
         self.played_card_label.config(image=played_card_image_final)
@@ -604,8 +604,8 @@ class Visual:
         global card_image_final_player_five, card_image_final_player_six, card_image_final_player_seven, card_image_final_player_eight
         global card_image_final_player_nine, card_image_final_player_ten, card_image_final_player_eleven, card_image_final_player_twelve
         global card_image_final_especial_card
-
-        card_image_player = Image.open(f'../cards/{card}.png')
+    
+        card_image_player = Image.open(f'../cards/{card.get_card_name()}.png')
         card_resize_image_player = card_image_player.resize((150, 218))
         card_image_final_especial_card = ImageTk.PhotoImage(card_resize_image_player)
         self.especial_card_label.config(image=card_image_final_especial_card)

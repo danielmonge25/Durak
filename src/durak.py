@@ -154,12 +154,13 @@ class durak(Game):
          Esta funcion no retorna nada
       """
 
-      # Verifica si son del mismo tipo 
+      # Tipo de la carta
       suit_player_two = self.get_suit(self.player_two.get_hand()[index])
-      #print("c", self.especial_card)
-      #print("a", suit_player_two)
-      #print("b", self.player_one.get_playing_card())
-      if suit_player_two in self.player_one.get_playing_card() or suit_player_two in self.especial_card:
+      #print("HOLA", self.player_one.get_playing_card().get_card_name())
+      #print("HOLA", self.especial_card.get_card_name())
+      
+      # Verifica si son del mismo tipo 
+      if suit_player_two in self.player_one.get_playing_card().get_card_name() or suit_player_two in self.especial_card.get_card_name():
          return True
       else:
          return False
@@ -255,7 +256,8 @@ class durak(Game):
       return self.especial_card
    
    def get_suit(self, string):
-      """
+      """   
+            El parametro visual debe ser objeto de la clase Card
             Esta funcion devuelve el tipo de la carta que el jugador va a jugar
       """
 
@@ -263,7 +265,7 @@ class durak(Game):
       suits = ["spades", "clubs", "hearts", "diamonds"]
 
       for x in suits:
-         if x in string:
+         if x in string.get_card_name():
             self.suit = x
             break
       

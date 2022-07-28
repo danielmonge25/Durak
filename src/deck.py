@@ -5,11 +5,12 @@ Creado el 26 de Junio del 2022
 '''
 
 import random
+from card import Card
 
 class deck:
     def __init__(self):
         """
-            Constructor de la clase Cards
+            Constructor de la clase deck
 
             Esta funcion no retorna nada
         """
@@ -20,7 +21,7 @@ class deck:
 
         # Mazo del juego
         self.deck = []
-    
+
     def createDeck(self):
         """
             Crea el mazo para el juego
@@ -28,9 +29,18 @@ class deck:
             Esta funcion no retorna nada
         """
 
+        """for suit in self.suits:
+            for value in self.values:
+                self.deck.append(f'{value}_of_{suit}')"""
+        
         for suit in self.suits:
             for value in self.values:
-                self.deck.append(f'{value}_of_{suit}')
+                card = Card()
+                card.set_card_name(f'{value}_of_{suit}')
+                self.deck.append(card)
+                #print(card.get_card_name())
+                
+        
 
     def deal_cards(self):
         """
