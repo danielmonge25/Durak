@@ -141,3 +141,11 @@ class Game(ABC):
     """
 
     pass
+
+  @abstractmethod
+  def get_card_name(self) -> None:
+    """
+      Metodo abstracto que obtiene el nombre de una carta
+    """
+
+    pass

@@ -13,18 +13,18 @@ class Card:
         """
 
         # Guarda el numero y tipo de la carta
-        self.card = ""
+        self.name = ""
     
-    def get_card_name(self):
+    def __str__(self):
         """
-            Esta funcion devuelve la carta
+            Esta funcion devuelve una string con el nombre de la carta
         """
 
-        return self.card
+        return self.name
 
-    def set_card_name(self, card):
+    def set_card_name(self, name):
         """
             Esta funcion establece el nombre y el tipo de la carta
         """
 
-        self.card = card
+        self.name = name

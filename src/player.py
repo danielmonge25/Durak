@@ -87,7 +87,7 @@ class player:
 
         for index in range(len(self.hand)):
             new_hand.append(self.hand[index].get_card_name())
-            print(new_hand[index])
+            (new_hand[index])
         print("\n")
 
         return new_hand
