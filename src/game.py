@@ -135,7 +135,7 @@ class Game(ABC):
     pass
 
   @abstractmethod
-  def set_deck(self) -> None:
+  def set_special_card(self) -> None:
     """
       Metodo abstracto que establece la carta especial del juego
     """

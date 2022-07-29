@@ -579,7 +579,7 @@ class Visual:
         """
 
         global played_card_image_final
-        print(card)
+        #print(card)
         played_card_image = Image.open(f'../cards/{card.get_card_name()}.png')
         played_card_resize_image = played_card_image.resize((150, 218))
         played_card_image_final = ImageTk.PhotoImage(played_card_resize_image)

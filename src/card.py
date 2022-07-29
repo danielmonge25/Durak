@@ -22,6 +22,13 @@ class Card:
 
         return self.name
 
+    def get_card_name(self):
+        """
+            Esta funcion devuelve una string con el nombre de la carta
+        """
+        
+        return self.name
+
     def set_card_name(self, name):
         """
             Esta funcion establece el nombre y el tipo de la carta

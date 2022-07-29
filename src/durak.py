@@ -7,7 +7,7 @@ Creado el 26 de Junio del 2022
 import csv
 import os.path
 from game import Game
-from JSON_serializer import JSON_Seializer
+from CSV_serializer import JSON_Seializer
 
 class durak(Game):
    def __init__(self, cards, player_one, player_two, visual):
@@ -154,7 +154,6 @@ class durak(Game):
 
       # Tipo de la carta
       suit_player_two = self.get_suit(self.player_two.get_hand()[index])
-      #print("HOLA", self.player_one.get_playing_card().get_card_name())
       #print("HOLA", self.especial_card.get_card_name())
       
       # Verifica si son del mismo tipo 
