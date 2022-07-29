@@ -201,12 +201,6 @@ class durak(Game):
       
 
    def load_game(self):
-      """
-         Carga los datos de la partida de un archivo .csv
-
-         Esta funcion no retorna nada
-      """
-
       if (os.path.exists('game.csv')):
          with open('game.csv', 'r') as file:
             counter = 0
@@ -217,35 +211,32 @@ class durak(Game):
 
                   elif(counter == 1):
                      line = line.rstrip()
-                     deck = line.split(',')
+                     self.set_deck(line.split(','))
 
                   elif(counter == 2):
                      line = line.rstrip()
                      if (player == '1'):
-                        player_one_hand = line.split(',')
+                        self.player_one.set_hand(line.split(','))
                      else:
-                        player_two_hand = line.split(',')
+                        self.player_two.set_hand(line.split(','))
 
                   elif(counter == 3):
                      line = line.rstrip()
+                     #print(line)
                      if (player == '1'):
-                        player_two_hand = line.split(',')
+                        self.player_two.set_hand(line.split(','))
                      else:
-                        player_one_hand = line.split(',')
+                        self.player_one.set_hand(line.split(','))
 
                   elif(counter == 4):
-                     special_card = line.rstrip()
+                     self.set_special_card(line.rstrip())
 
                   counter += 1
-                  
-            self.set_deck(deck)
-            self.player_one.set_hand(player_one_hand)
-            self.player_two.set_hand(player_two_hand)
-            self.set_special_card(special_card)
+               
             return player
       else:
          return 0
-   
+
    def get_special_card(self):
       """
             Esta funcion devuelve la carta especial del juego
@@ -253,7 +244,7 @@ class durak(Game):
 
       return self.especial_card
    
-   def get_suit(self, string):
+   def get_suit(self, card):
       """   
             El parametro visual debe ser objeto de la clase Card
             Esta funcion devuelve el tipo de la carta que el jugador va a jugar
@@ -263,7 +254,7 @@ class durak(Game):
       suits = ["spades", "clubs", "hearts", "diamonds"]
 
       for x in suits:
-         if x in string.get_card_name():
+         if x in card.get_card_name():
             self.suit = x
             break
       
@@ -282,3 +273,9 @@ class durak(Game):
       """
 
       self.especial_card = special_card 
+
+   def get_card_name(self, card):
+      """
+         Esta funcion obtiene el nombre de una carta
+      """
+      return card.get_card_name
