@@ -6,8 +6,9 @@ Creado el 26 de Junio del 2022
 
 import random
 from card import Card
+from abstract_deck import Abstract_Deck
 
-class deck:
+class deck(Abstract_Deck):
     def __init__(self):
         """
             Constructor de la clase deck
@@ -40,8 +41,6 @@ class deck:
                 self.deck.append(card)
                 #print(card.get_card_name())
                 
-        
-
     def deal_cards(self):
         """
             Elige una carta del mazo aleatoriamente y la elimina

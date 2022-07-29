@@ -15,3 +15,5 @@ class Abstract_Serializer(ABC):
 
             Esta funcion no retorna nada
         """
+        
+        pass

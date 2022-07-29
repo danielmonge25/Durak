@@ -6,7 +6,7 @@ Creado el 26 de Junio del 2022
 
 from durak import durak
 from visual import Visual
-from deck import deck
+from french_deck import deck
 from player import player
 
 def main():
