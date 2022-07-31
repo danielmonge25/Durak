@@ -200,6 +200,11 @@ class durak(Game):
       
 
    def load_game(self):
+      """
+         Guarda la partida
+
+         Esta funcion no retorna nada
+      """
       if (os.path.exists('game.csv')):
          with open('game.csv', 'r') as file:
             counter = 0
